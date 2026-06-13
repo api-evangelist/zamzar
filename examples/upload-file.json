@@ -1,0 +1,27 @@
+{
+  "title": "Upload a File",
+  "summary": "Upload a local file to Zamzar for use as input to a conversion job.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.zamzar.com/v1/files",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "multipart/form-data"
+    },
+    "body": {
+      "content": "<binary file data>",
+      "name": "document.docx"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": 123456,
+      "key": "apikey",
+      "name": "document.docx",
+      "size": 204800,
+      "format": "docx",
+      "created_at": "2022-01-01T14:00:00Z"
+    }
+  }
+}

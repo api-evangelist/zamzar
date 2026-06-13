@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zamzar/main/json-schema/account.json",
+  "title": "Account",
+  "type": "object",
+  "description": "Your current subscription plan and the number of conversions that you have remaining in this billing period.",
+  "properties": {
+    "test_credits_remaining": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The number of test conversion credits remaining in this billing period (free)"
+    },
+    "credits_remaining": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The number of conversion credits remaining in this billing period (included as part of your plan)"
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name used to describe this plan"
+        },
+        "price_per_month": {
+          "type": "number",
+          "format": "float",
+          "description": "The monthly subscription cost for this plan"
+        },
+        "conversions_per_month": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of conversion credits included in this plan per month"
+        },
+        "maximum_file_size": {
+          "type": ["integer", "null"],
+          "format": "int64",
+          "description": "The maximum size (in bytes) of files that can be uploaded with this plan; or null if this plan has no such cap."
+        }
+      }
+    }
+  },
+  "example": {
+    "test_credits_remaining": 98,
+    "credits_remaining": 97,
+    "plan": {
+      "name": "Free",
+      "price_per_month": 0,
+      "conversions_per_month": 100,
+      "maximum_file_size": 1024
+    }
+  }
+}

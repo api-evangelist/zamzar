@@ -1,0 +1,40 @@
+{
+  "title": "List Supported Formats",
+  "summary": "Retrieve a paginated list of all source formats and their available conversion targets.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.zamzar.com/v1/formats?limit=10",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "name": "doc",
+          "targets": [
+            {"name": "docx", "credit_cost": 1},
+            {"name": "pdf", "credit_cost": 1},
+            {"name": "txt", "credit_cost": 1}
+          ]
+        },
+        {
+          "name": "docx",
+          "targets": [
+            {"name": "doc", "credit_cost": 1},
+            {"name": "pdf", "credit_cost": 1},
+            {"name": "txt", "credit_cost": 1}
+          ]
+        }
+      ],
+      "paging": {
+        "total_count": 150,
+        "first": "doc",
+        "last": "docx",
+        "limit": 10
+      }
+    }
+  }
+}

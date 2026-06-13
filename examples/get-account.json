@@ -1,0 +1,30 @@
+{
+  "title": "Get Account Information",
+  "summary": "Retrieve account and plan information including credits remaining for the current billing period.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.zamzar.com/v1/account",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "X-RateLimit-Limit": "600",
+      "X-RateLimit-Remaining": "597",
+      "Zamzar-Credits-Remaining": "97",
+      "Zamzar-Test-Credits-Remaining": "98"
+    },
+    "body": {
+      "test_credits_remaining": 98,
+      "credits_remaining": 97,
+      "plan": {
+        "name": "Free",
+        "price_per_month": 0,
+        "conversions_per_month": 100,
+        "maximum_file_size": 1048576
+      }
+    }
+  }
+}

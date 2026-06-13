@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zamzar/main/json-schema/failure.json",
+  "title": "Failure",
+  "type": "object",
+  "description": "If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Can be used to determine what action to take"
+    },
+    "message": {
+      "type": "string",
+      "description": "Provides an explanation of the failure (which could also be displayed to your users)"
+    }
+  },
+  "example": {
+    "code": 5,
+    "message": "A file named portrait.png already exists"
+  }
+}

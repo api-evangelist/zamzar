@@ -1,0 +1,73 @@
+{
+  "vocabulary": {
+    "provider": "Zamzar",
+    "domain": "File Conversion",
+    "terms": [
+      {
+        "term": "Job",
+        "definition": "The process of converting a source file to a target format. A job has a lifecycle: initialising, converting, successful, failed, or cancelled.",
+        "related": ["source_file", "target_format", "credit_cost"]
+      },
+      {
+        "term": "Import",
+        "definition": "The process of copying a file from an external URL, (S)FTP server, or Amazon S3 bucket into the Zamzar system for use as a conversion source.",
+        "related": ["url", "status", "file"]
+      },
+      {
+        "term": "File",
+        "definition": "A file which has been uploaded, imported, or produced as output from a conversion job. Files have an expiry date after which they are deleted.",
+        "related": ["id", "name", "size", "format"]
+      },
+      {
+        "term": "Format",
+        "definition": "A file format identifier (e.g. pdf, docx, png) representing either a source format or a target format for conversion.",
+        "related": ["targets", "credit_cost"]
+      },
+      {
+        "term": "Credit",
+        "definition": "The unit of billing on the Zamzar platform. Each conversion job costs a certain number of credits based on the target format. Plans include a monthly allocation of credits.",
+        "related": ["credit_cost", "credits_remaining", "conversions_per_month"]
+      },
+      {
+        "term": "Sandbox",
+        "definition": "A test environment (sandbox.zamzar.com) where conversions can be performed without consuming production credits. Test credits are separate from production credits.",
+        "related": ["test_credits_remaining", "sandbox"]
+      },
+      {
+        "term": "Export",
+        "definition": "The process of copying a converted file to an external destination such as an S3 bucket or (S)FTP server after a conversion job completes.",
+        "related": ["export_url", "exports"]
+      },
+      {
+        "term": "source_file",
+        "definition": "The input to a conversion job. Can be a locally uploaded file (by ID), a remote URL (HTTP, FTP, SFTP), an S3 URL, or binary data uploaded inline with the job request.",
+        "related": ["Job", "Import"]
+      },
+      {
+        "term": "target_format",
+        "definition": "The desired output format identifier for a conversion job (e.g. pdf, mp4, png). Must be a format supported by the Zamzar API.",
+        "related": ["Job", "Format"]
+      },
+      {
+        "term": "Paging",
+        "definition": "Zamzar API list endpoints return paginated responses. Use the limit parameter to control page size (max 50) and the after parameter with the last value from the paging object to retrieve subsequent pages.",
+        "related": ["limit", "after", "before", "first", "last", "total_count"]
+      },
+      {
+        "term": "Plan",
+        "definition": "A subscription tier that determines the number of monthly conversion credits, maximum file size, and monthly cost.",
+        "related": ["Account", "credits_remaining", "conversions_per_month"]
+      },
+      {
+        "term": "Failure",
+        "definition": "An object attached to a failed job, import, or export that describes the error with a numeric code and human-readable message.",
+        "related": ["Job", "Import", "Export"]
+      },
+      {
+        "term": "Rate Limit",
+        "definition": "API requests are rate-limited. The current limit and remaining requests are returned in X-RateLimit-Limit and X-RateLimit-Remaining response headers.",
+        "related": ["X-RateLimit-Limit", "X-RateLimit-Remaining"]
+      }
+    ]
+  }
+}

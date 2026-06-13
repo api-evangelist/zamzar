@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zamzar/main/json-schema/file.json",
+  "title": "File",
+  "type": "object",
+  "description": "Represents a file which has been uploaded, imported or converted.",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The unique identifier assigned to the file"
+    },
+    "key": {
+      "type": "string",
+      "description": "The API key which was used to create the file"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name that was specified for the file (must not be more than 256 chars)"
+    },
+    "size": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The size of the file in bytes, derived from the content of the file"
+    },
+    "format": {
+      "type": "string",
+      "description": "The identifier of the format of the file"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the file was created on Zamzar servers (UTC in ISO_8601)"
+    }
+  },
+  "example": {
+    "id": 3,
+    "key": "apikey",
+    "name": "filename.jpg",
+    "size": 4096,
+    "format": "jpg",
+    "created_at": "2022-01-01T14:15:22Z"
+  }
+}

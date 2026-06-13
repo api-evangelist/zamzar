@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/zamzar/main/json-schema/import.json",
+  "title": "Import",
+  "type": "object",
+  "description": "Represents the process of copying a file from an external URL, (S)FTP server, or an Amazon S3 bucket.",
+  "required": ["id"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The unique identifier assigned to the import"
+    },
+    "key": {
+      "type": "string",
+      "description": "The API key used to create the import."
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL to the file being imported."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the import",
+      "enum": ["initialising", "downloading", "successful", "failed"],
+      "example": "failed"
+    },
+    "failure": {
+      "$ref": "failure.json"
+    },
+    "file": {
+      "$ref": "file.json"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time at which the import was created on Zamzar servers (UTC in ISO_8601)"
+    },
+    "finished_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "The time at which the import finished if successful, or null otherwise (UTC in ISO_8601)"
+    }
+  },
+  "example": {
+    "id": 1,
+    "key": "apikey",
+    "url": "http://www.example.com/logo.png",
+    "status": "failed",
+    "failure": {
+      "code": 11,
+      "message": "an invalid value was specified for a parameter"
+    },
+    "created_at": "2022-01-01T14:15:22Z",
+    "finished_at": "2022-01-01T14:15:22Z"
+  }
+}

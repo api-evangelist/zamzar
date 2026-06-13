@@ -1,0 +1,92 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "zamzar": "https://developers.zamzar.com/docs#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Job": "zamzar:Job",
+    "File": "zamzar:File",
+    "Import": "zamzar:Import",
+    "Format": "zamzar:Format",
+    "Account": "zamzar:Account",
+    "Export": "zamzar:Export",
+    "Failure": "zamzar:Failure",
+
+    "id": "@id",
+    "key": "zamzar:apiKey",
+    "status": "zamzar:status",
+    "sandbox": "zamzar:sandbox",
+    "credit_cost": "zamzar:creditCost",
+    "credits_remaining": "zamzar:creditsRemaining",
+    "test_credits_remaining": "zamzar:testCreditsRemaining",
+    "conversions_per_month": "zamzar:conversionsPerMonth",
+    "maximum_file_size": "zamzar:maximumFileSize",
+    "price_per_month": "zamzar:pricePerMonth",
+
+    "source_file": "zamzar:sourceFile",
+    "target_format": "zamzar:targetFormat",
+    "source_format": "zamzar:sourceFormat",
+    "target_files": "zamzar:targetFiles",
+    "export_url": "zamzar:exportUrl",
+    "exports": "zamzar:exports",
+    "options": "zamzar:options",
+
+    "name": "schema:name",
+    "url": "schema:url",
+    "size": "schema:contentSize",
+    "format": "schema:encodingFormat",
+    "plan": "zamzar:plan",
+    "targets": "zamzar:targets",
+    "failure": "zamzar:failure",
+
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "finished_at": {
+      "@id": "zamzar:finishedAt",
+      "@type": "xsd:dateTime"
+    },
+
+    "data": {
+      "@id": "zamzar:data",
+      "@container": "@set"
+    },
+    "paging": "zamzar:paging",
+    "total_count": "zamzar:totalCount",
+    "first": "zamzar:first",
+    "last": "zamzar:last",
+    "limit": "zamzar:limit"
+  },
+  "@graph": [
+    {
+      "@id": "zamzar:ZamzarAPI",
+      "@type": "schema:WebAPI",
+      "schema:name": "Zamzar File Conversion API",
+      "schema:description": "REST API for converting files between 100+ formats including documents, videos, audio, images, and CAD files. Supports over 1,100 distinct conversion paths.",
+      "schema:url": "https://developers.zamzar.com/",
+      "schema:version": "0.0.7",
+      "schema:license": "https://opensource.org/licenses/MIT",
+      "schema:termsOfService": "https://developers.zamzar.com",
+      "schema:documentation": "https://developers.zamzar.com/docs",
+      "schema:provider": {
+        "@type": "schema:Organization",
+        "schema:name": "Zamzar",
+        "schema:url": "https://www.zamzar.com/",
+        "schema:email": "api-sdks@zamzar.com"
+      },
+      "schema:availableChannel": [
+        {
+          "@type": "schema:ServiceChannel",
+          "schema:name": "Production",
+          "schema:serviceUrl": "https://api.zamzar.com/v1"
+        },
+        {
+          "@type": "schema:ServiceChannel",
+          "schema:name": "Sandbox",
+          "schema:serviceUrl": "https://sandbox.zamzar.com/v1"
+        }
+      ]
+    }
+  ]
+}

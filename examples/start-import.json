@@ -1,0 +1,26 @@
+{
+  "title": "Start a URL Import",
+  "summary": "Import a file from an external HTTP URL, FTP/SFTP server, or Amazon S3 bucket.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.zamzar.com/v1/imports",
+    "headers": {
+      "Authorization": "Bearer YOUR_API_KEY",
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    "body": {
+      "url": "https://www.example.com/document.docx"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": 1,
+      "key": "apikey",
+      "url": "https://www.example.com/document.docx",
+      "status": "initialising",
+      "created_at": "2022-01-01T14:15:22Z",
+      "finished_at": null
+    }
+  }
+}
