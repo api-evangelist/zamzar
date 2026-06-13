@@ -1,0 +1,78 @@
+aid: zamzar
+name: Zamzar
+description: >
+  Zamzar is an online file conversion platform with a REST API for converting files between
+  100+ formats including documents, videos, audio, images, and CAD files. The API supports
+  over 1,100 distinct format conversions processed asynchronously using a credit-based
+  billing model. File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
+  Both a production environment and a sandbox environment are provided for development.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/zamzar/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - File Conversion
+  - Documents
+  - Video
+  - Audio
+  - Images
+  - CAD
+  - REST API
+apis:
+  - aid: zamzar:zamzar-api
+    name: Zamzar File Conversion API
+    description: >
+      REST API for converting files between 100+ formats asynchronously. Supports documents,
+      videos, audio, images, CAD files, and eBooks with over 1,100 distinct conversion paths.
+      File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developers.zamzar.com/
+    baseURL: https://api.zamzar.com/v1/
+    tags:
+      - File Conversion
+      - Documents
+      - Video
+      - Audio
+      - Images
+      - CAD
+    properties:
+      - type: Documentation
+        url: https://developers.zamzar.com/docs
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/zamzar/zamzar-spec/main/openapi/spec.yaml
+      - type: Authentication
+        url: https://developers.zamzar.com/docs#authentication
+      - type: Plans
+        url: plans/zamzar-plans-pricing.yml
+      - type: RateLimits
+        url: rate-limits/zamzar-rate-limits.yml
+      - type: FinOps
+        url: finops/zamzar-finops.yml
+common:
+  - type: Website
+    url: https://www.zamzar.com/
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: GitHubOrg
+    url: https://github.com/zamzar
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/zamzar
+  - type: Blog
+    url: https://blog.zamzar.com/
+  - type: Pricing
+    url: https://developers.zamzar.com/pricing
+  - type: StatusPage
+    url: https://www.zamzarstatus.com/
+  - type: X
+    url: https://twitter.com/zamzar
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

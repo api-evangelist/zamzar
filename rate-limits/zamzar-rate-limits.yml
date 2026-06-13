@@ -1,0 +1,37 @@
+name: Zamzar API Rate Limits
+description: Per-second rate limits applied to Zamzar API endpoints across production and sandbox environments.
+url: https://developers.zamzar.com/docs
+environments:
+  - name: Production
+    baseUrl: https://api.zamzar.com/v1/
+    limits:
+      - endpoint: /jobs
+        method: POST
+        requestsPerSecond: 5
+        description: Job creation rate limit in the production environment.
+      - endpoint: "/*"
+        method: GET
+        requestsPerSecond: 10
+        description: Read endpoint rate limit for all GET requests in production.
+  - name: Sandbox
+    baseUrl: https://sandbox.zamzar.com/v1/
+    limits:
+      - endpoint: /jobs
+        method: POST
+        requestsPerSecond: 1
+        description: Job creation rate limit in the sandbox environment.
+      - endpoint: "/*"
+        method: GET
+        requestsPerSecond: 3
+        description: Read endpoint rate limit for all GET requests in sandbox.
+headers:
+  - name: Zamzar-Credits-Remaining
+    description: Number of production conversion credits remaining on the account.
+  - name: Zamzar-Test-Credits-Remaining
+    description: Number of test/sandbox conversion credits remaining on the account.
+errorCodes:
+  - code: 429
+    message: TOO MANY REQUESTS
+    description: Returned when the rate limit is exceeded. Includes a Retry-After header indicating when the request can be retried.
+  - retryHeader: Retry-After
+    description: Indicates the number of seconds to wait before retrying the request after a 429 response.

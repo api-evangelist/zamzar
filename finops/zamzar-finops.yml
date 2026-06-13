@@ -1,0 +1,54 @@
+name: Zamzar FinOps
+description: Financial operations guidance for managing costs when using the Zamzar file conversion API.
+url: https://developers.zamzar.com/pricing
+costModel:
+  type: credit-based
+  description: >
+    Zamzar uses a conversion credit system. Each file conversion consumes one credit regardless
+    of the output file size or format. Credits are bundled in monthly plans; overages are billed
+    at the per-credit rate for the active plan tier.
+  currency: USD
+creditRates:
+  - plan: Startup
+    creditsPerMonth: 500
+    pricePerCredit: 0.05
+    monthlyBase: 25.00
+  - plan: Growth
+    creditsPerMonth: 2500
+    pricePerCredit: 0.04
+    monthlyBase: 99.00
+  - plan: Scale
+    creditsPerMonth: 10000
+    pricePerCredit: 0.03
+    monthlyBase: 299.00
+  - plan: Enterprise
+    creditsPerMonth: custom
+    pricePerCredit: custom
+    monthlyBase: custom
+costControls:
+  - name: Use Sandbox for Development
+    description: >
+      The sandbox environment provides 100 free test credits per month with a 1 MB file size
+      limit. Use sandbox for all development and testing to avoid consuming production credits.
+  - name: Monitor Credits via Response Headers
+    description: >
+      Check the Zamzar-Credits-Remaining response header on every API call to track remaining
+      credits in real time and avoid unexpected overage charges.
+  - name: Delete Files Promptly
+    description: >
+      Converted files are stored on Zamzar servers for 1–3 days depending on plan. Download
+      and delete files immediately after conversion to reduce storage footprint and comply with
+      data retention policies.
+  - name: Choose the Right Plan Tier
+    description: >
+      Analyze monthly conversion volume to select the most cost-efficient plan. The per-credit
+      cost decreases from $0.05 (Startup) to $0.03 (Scale), so higher-volume use cases benefit
+      significantly from upgrading tiers.
+  - name: Batch File Conversions
+    description: >
+      Where possible, batch multiple conversions into single API sessions to minimize overhead
+      and better track credit consumption per workflow.
+overagePolicy:
+  description: >
+    Overage conversions beyond the monthly credit bundle are billed at the plan's per-credit rate.
+    There are no hard caps by default; monitor usage to avoid unexpected overage bills.

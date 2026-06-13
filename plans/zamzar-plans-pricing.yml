@@ -1,0 +1,60 @@
+name: Zamzar Plans and Pricing
+description: Pricing plans for the Zamzar file conversion API, ranging from a free test tier to high-volume scale plans.
+url: https://developers.zamzar.com/pricing
+plans:
+  - name: Test
+    description: Free sandbox environment for evaluating the API with limited credits and file size.
+    price: 0.00
+    currency: USD
+    period: month
+    credits: 100
+    maxFileSizeMB: 1
+    filesStoredDays: 1
+    supportResponseDays: 3
+    sandbox: true
+  - name: Startup
+    description: Entry-level production plan for small projects and low-volume conversions.
+    price: 25.00
+    currency: USD
+    period: month
+    credits: 500
+    pricePerCredit: 0.05
+    overagePricePerCredit: 0.05
+    maxFileSizeMB: 50
+    filesStoredDays: 2
+    supportResponseDays: 2
+  - name: Growth
+    description: Mid-tier plan for growing applications with unlimited file sizes and more credits.
+    price: 99.00
+    currency: USD
+    period: month
+    credits: 2500
+    pricePerCredit: 0.04
+    overagePricePerCredit: 0.04
+    maxFileSizeMB: unlimited
+    filesStoredDays: 3
+    supportResponseDays: 2
+  - name: Scale
+    description: High-volume plan with the lowest per-credit cost, priority support, and custom conversions.
+    price: 299.00
+    currency: USD
+    period: month
+    credits: 10000
+    pricePerCredit: 0.03
+    overagePricePerCredit: 0.03
+    maxFileSizeMB: unlimited
+    filesStoredDays: 3
+    supportResponseDays: 1
+    customConversions: true
+  - name: Enterprise
+    description: Custom plan for organizations with very high volume needs. Contact Zamzar for pricing.
+    price: custom
+    currency: USD
+    period: month
+    credits: custom
+    maxFileSizeMB: unlimited
+    customConversions: true
+notes:
+  - All production plans include Amazon S3, FTP/SFTP, and HTTP/HTTPS source file support.
+  - Unused credits do not roll over between months.
+  - Custom enterprise plans available by contacting Zamzar directly.
