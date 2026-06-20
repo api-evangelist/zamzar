@@ -6,7 +6,7 @@ description: >
   over 1,100 distinct format conversions processed asynchronously using a credit-based
   billing model. File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
   Both a production environment and a sandbox environment are provided for development.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/zamzar/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -27,7 +27,7 @@ apis:
       REST API for converting files between 100+ formats asynchronously. Supports documents,
       videos, audio, images, CAD files, and eBooks with over 1,100 distinct conversion paths.
       File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developers.zamzar.com/
     baseURL: https://api.zamzar.com/v1/
     tags:
