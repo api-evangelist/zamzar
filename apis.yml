@@ -51,6 +51,10 @@ apis:
       - type: FinOps
         url: finops/zamzar-finops.yml
 common:
+  - type: DomainSecurity
+    url: security/zamzar-domain-security.yml
+  - type: Authentication
+    url: authentication/zamzar-authentication.yml
   - type: Website
     url: https://www.zamzar.com/
   - type: Documentation

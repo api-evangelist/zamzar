@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/zamzar-openapi.yaml
+summary:
+  types:
+  - http
+schemes:
+- name: ApiKeyAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/zamzar-openapi.yaml
