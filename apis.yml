@@ -51,6 +51,8 @@ apis:
       - type: FinOps
         url: finops/zamzar-finops.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/zamzar-agentic-access.yml
   - type: DomainSecurity
     url: security/zamzar-domain-security.yml
   - type: Authentication
