@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: Zamzar Account Formats API
+  description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
+  termsOfService: http://developers.zamzar.com
+  contact:
+    email: api-sdks@zamzar.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.7
+servers:
+- url: https://api.zamzar.com/v1
+  description: Production Server
+- url: https://sandbox.zamzar.com/v1
+  description: Test Server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Formats
+  description: List supported source and target formats
+paths:
+  /formats:
+    get:
+      tags:
+      - Formats
+      summary: List all formats
+      operationId: listFormats
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          example: 10
+        description: Limit the number of results (max 50)
+      - in: query
+        name: after
+        required: false
+        schema:
+          type: string
+          example: mpg
+        description: Retrieve formats after the specified format
+      - in: query
+        name: before
+        required: false
+        schema:
+          type: string
+          example: mpg
+        description: Retrieve formats before the specified format
+      responses:
+        '200':
+          description: 'Source formats are ordered alphabetically within the `data` array of formats and include the target formats and associated cost of conversion.
+
+
+            A `paging` object is included within the results, with each page having a limit of 50 records by default. Request the next page by using the `after` parameter in reference to the `last` property within the paging object of the current response.
+
+
+            For example to retrieve the next page of formats after the `msg` format:
+
+
+            ```
+
+            https://api.zamzar.com/v1/formats/?after=msg
+
+            ```
+
+
+            To limit the results to 10 records:
+
+
+            ```
+
+            https://api.zamzar.com/v1/formats/?after=msg&limit=10
+
+            ```'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Formats'
+      description: Retrieve a list of all source formats which have one or more target (conversion) formats.
+  /formats/{format}:
+    get:
+      tags:
+      - Formats
+      summary: Retrieve a specific format
+      operationId: getFormatById
+      parameters:
+      - in: path
+        name: format
+        schema:
+          type: string
+        required: true
+        description: The format to retrieve
+        example: doc
+      responses:
+        '200':
+          description: "A specific source format and valid target formats.\n\n```json\n{\n  \"name\": \"doc\",\n  \"targets\": [\n    {\n      \"name\": \"docx\",\n      \"credit_cost\": 1\n    },\n    {\n      \"name\": \"pdf\",\n      \"credit_cost\": 1\n    }\n  ]\n}\n```"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Format'
+        '404':
+          description: Unsupported Format.
+      description: 'Retrieve a specific format and the cost of performing a conversion to one or more target formats.
+
+        '
+components:
+  schemas:
+    PagingString:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: The number of elements in the entire collection
+          format: int32
+        first:
+          type: string
+          description: The identifier of the first element in this page of the collection
+        last:
+          type: string
+          description: The identifier of the last element in this page of the collection
+        limit:
+          type: integer
+          description: The maximum number of elements this page could contain
+          format: int32
+      example:
+        total_count: 100
+        first: docx
+        last: pdf
+        limit: 50
+      description: When you request a list of of all resources of any type (files, formats, jobs), you will receive a paged collection as a response. A paged collection allows you to view a subset of the entire collection (limited to 50 elements) and makes it easy to implement pagination in your application. Use the `limit` parameter to limit the number of results and the `after` parameter to request the next page of results (based on the value of `last` within the paging object).
+    Formats:
+      type: object
+      description: Contains a paged collection of formats listed in alphabetical order. The `targets` array represent the formats which the source format `name` can be converted to and the associated cost (in credits).
+      properties:
+        paging:
+          $ref: '#/components/schemas/PagingString'
+        data:
+          type: array
+          description: An array of source and target formats ordered alphabetically.
+          items:
+            $ref: '#/components/schemas/Format'
+    Format:
+      type: object
+      description: Represents the source format and an array of valid target formats.
+      properties:
+        name:
+          type: string
+          description: The name of the format, synonymous with `source format`
+        targets:
+          type: array
+          description: The conversions that Zamzar supports for this format, synonymous with `target formats`
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the target format
+              credit_cost:
+                type: integer
+                description: The number of base credits that are charged when scheduling a job for this conversion
+                format: int32
+      example:
+        name: doc
+        targets:
+        - name: docx
+          credit_cost: 1
+        - name: pdf
+          credit_cost: 1
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+externalDocs:
+  description: Find out more about the Zamzar API
+  url: https://developers.zamzar.com/docs

@@ -1,0 +1,468 @@
+openapi: 3.0.3
+info:
+  title: Zamzar Account Jobs API
+  description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
+  termsOfService: http://developers.zamzar.com
+  contact:
+    email: api-sdks@zamzar.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.7
+servers:
+- url: https://api.zamzar.com/v1
+  description: Production Server
+- url: https://sandbox.zamzar.com/v1
+  description: Test Server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Jobs
+  description: Start a new conversion job plus related operations
+paths:
+  /jobs:
+    get:
+      tags:
+      - Jobs
+      summary: Retrieve a list of all jobs
+      description: Retrieve a list of all jobs
+      operationId: listJobs
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 50
+        description: Limit the number of results (max 50)
+        example: 25
+      - in: query
+        name: after
+        required: false
+        schema:
+          type: integer
+        description: Retrieve jobs after the specified jobId
+        example: 42
+      - in: query
+        name: before
+        required: false
+        schema:
+          type: integer
+        description: Retrieve jobs after the specified jobId
+        example: 42
+      responses:
+        '200':
+          description: A list of all jobs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Jobs'
+    post:
+      description: "Submit a conversion job for a local file, an uploaded file, a remote URL or S3 bucket.\n\n### Starting a job for a local file\nTo start a conversion job and upload a source file in a single request, issue a multipart POST request to the jobs endpoint. One part of the request should specify the target format and (optionally) a source format:\n\n - `source_file`: The binary data of the source file containing the following headers:\n   - `Content-Type` - an Internet media type that indicates the format of the data in the body of the request\n   - `Content-Length` - the size, in bytes, of the data in the body of the request\n - `target_format`: the identifying name of the format that `source_file` will be converted to\n - `source_format`: optionally the identifying name of the format of the `source_file` (and is used to specify a source format that is different to the extension of the `source_file`)\n\n### Starting a job for a url\nTo start a conversion job for a source file that resides on another server, issue a POST request to the jobs endpoint with the following parameters:\n\n  - `source_file`: The url of the file to be converted. Examples:\n    - `http://www.example.com/logo.png`\n    - `https://www.example.com/logo.png`\n    - `https://username:password@www.example.com/logo.png`\n    - `ftp://ftp.example.com/logo.png`\n    - `ftp://username:password@ftp.example.com/logo.png`\n    - `sftp://username:password@sftp.example.com/logo.png`\n  - `target_format`: the identifying name of the format that `source_file` will be converted to\n  - `source_format`: optionally the identifying name of the format of the `source_file` (and is used to specify a source format that is different to the extension of the `source_file`)\n\n### Starting a job for an Amazon S3 file\nTo start a conversion job for a source file that resides on Amazon's Simple Storage Service (S3), first determine whether you need to setup any credentials to access the file. If needed you can configure access to Amazon S3 via the [Connected Services](https://developers.zamzar.com/user/services) page.\n\nNext, determine the S3 URL to send to our API. The S3 URL will use one of the styles shown below. For private files, note that CREDENTIAL_NAME must match exactly the credential name you have used on the [Connected Services](https://developers.zamzar.com/user/services) page.\n\n  - Public file - `s3://my-bucket-name/logo.png`\n  - Private file - `s3://CREDENTIAL_NAME@my-bucket-name/logo.png`\n\nOnce you have determined the S3 URL, issue a POST request to the jobs endpoint with the following parameters:\n\n  - `source_file`: the Amazon S3 url of the file to be converted\n  - `target_format`: the identifying name of the format that `source_file` will be converted to\n  - `source_format`: optionally the identifying name of the format of the `source_file` (and is used to specify a source format that is different to the extension of the `source_file`)\n\n### Starting a job for a file which has already been uploaded\nTo start a job for a file that you’ve already uploaded to our servers, issue a POST request to the jobs endpoint, with the following arguments:\n\n  - `source_file`: the unique identifier of the file that will be converted\n  - `target_format`: the identifying name of the format that `source_file` will be converted to"
+      tags:
+      - Jobs
+      summary: Submit a conversion job
+      operationId: submitJob
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              oneOf:
+              - type: object
+                required:
+                - source_file
+                - target_format
+                properties:
+                  source_file:
+                    type: string
+                    description: Binary data of the source file
+                    format: binary
+                  target_format:
+                    type: string
+                    description: The name of the format to convert the file to
+                    example: bmp
+                  source_format:
+                    type: string
+                    description: Optional. The source format if the file does not have an extension or if the actual format is different to the extension
+                    example: png
+                  export_url:
+                    type: string
+                    description: Optional. The path to a (S)FTP folder or S3 bucket where the converted file will be transferred after completion
+                    example: s3://CREDENTIAL_NAME@my-bucket-name/logo.png
+                  options:
+                    type: object
+                    description: Optional. Specify additional options for the conversion
+                    additionalProperties: true
+              - type: object
+                required:
+                - source_file
+                - target_format
+                properties:
+                  source_file:
+                    type: string
+                    description: URL of the source file
+                    format: url
+                  target_format:
+                    type: string
+                    description: The name of the format to convert the file to
+                    example: bmp
+                  source_format:
+                    type: string
+                    description: Optional. The source format if the file does not have an extension or if the actual format is different to the extension
+                    example: png
+                  export_url:
+                    type: string
+                    description: Optional. The path to a (S)FTP folder or S3 bucket where the converted file will be transferred after completion
+                    example: s3://CREDENTIAL_NAME@my-bucket-name/logo.png
+                  options:
+                    type: object
+                    description: Optional. Specify additional options for the conversion
+                    additionalProperties: true
+              - type: object
+                required:
+                - source_file
+                - target_format
+                properties:
+                  source_file:
+                    type: integer
+                    description: ID of the source file
+                  target_format:
+                    type: string
+                    description: The name of the format to convert the file to
+                    example: bmp
+                  export_url:
+                    type: string
+                    description: Optional. The path to a (S)FTP folder or S3 bucket where the converted file will be transferred after completion
+                    example: s3://CREDENTIAL_NAME@my-bucket-name/logo.png
+                  options:
+                    type: object
+                    description: Optional. Specify additional options for the conversion
+                    additionalProperties: true
+        description: ''
+      responses:
+        '201':
+          description: Job submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+  /jobs/successful:
+    get:
+      tags:
+      - Jobs
+      summary: Retrieve a list of all successful jobs
+      description: Retrieve a list of all successful jobs
+      operationId: listSuccessfulJobs
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+          default: 50
+        description: Limit the number of results (max 50)
+        example: 25
+      - in: query
+        name: after
+        required: false
+        schema:
+          type: integer
+        description: Retrieve jobs after the specified jobId
+        example: 42
+      - in: query
+        name: before
+        required: false
+        schema:
+          type: integer
+        description: Retrieve jobs after the specified jobId
+        example: 42
+      responses:
+        '200':
+          description: A list of all successful jobs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Jobs'
+  /jobs/{jobId}:
+    get:
+      tags:
+      - Jobs
+      summary: Retrieve a specific job
+      description: Retrieve a specific job
+      operationId: getJobById
+      parameters:
+      - in: path
+        name: jobId
+        schema:
+          type: integer
+        required: true
+        description: Numeric id of the job to get
+      responses:
+        '200':
+          description: Information about a specific job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+    delete:
+      tags:
+      - Jobs
+      summary: Cancel a job
+      description: Cancel a job
+      operationId: cancelJobById
+      parameters:
+      - in: path
+        name: jobId
+        schema:
+          type: integer
+        required: true
+        description: Numeric id of the job to cancel
+      responses:
+        '200':
+          description: Job cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+components:
+  schemas:
+    Job:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The unique identifier assigned to the job
+          example: 1
+        key:
+          type: string
+          description: The API key used to create the job
+          example: apikey
+        status:
+          type: string
+          description: The current status of the job
+          enum:
+          - initialising
+          - converting
+          - successful
+          - failed
+          - cancelled
+          example: failed
+        failure:
+          $ref: '#/components/schemas/Failure'
+        sandbox:
+          type: boolean
+          description: Indicates whether or not the job was processed on the developer sandbox (i.e. at no cost)
+          example: false
+        created_at:
+          type: string
+          description: The time at which the job was created (UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601))
+          format: date-time
+          example: '2022-01-01T14:15:22Z'
+        finished_at:
+          type: string
+          description: The time at which the job finished if successful, or null otherwise (UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601))
+          format: date-time
+          nullable: true
+          example: '2022-01-01T14:15:22Z'
+        import:
+          $ref: '#/components/schemas/Import'
+        source_file:
+          $ref: '#/components/schemas/File'
+        target_files:
+          type: array
+          description: The output from the job
+          items:
+            $ref: '#/components/schemas/File'
+        target_format:
+          type: string
+          description: The name of the format to which `source_file` is being converted
+          example: bmp
+        credit_cost:
+          type: integer
+          description: The cost in conversion credits of the job
+          format: int32
+          example: 1
+        export_url:
+          type: string
+          description: The location to which all converted files will be copied
+          example: s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg
+        exports:
+          $ref: '#/components/schemas/Exports'
+        options:
+          type: object
+          description: Additional options for the conversion
+          additionalProperties: true
+      description: Represents the process of converting a file to another format.
+    PagingNumeric:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: The number of elements in the entire collection
+          format: int32
+        first:
+          type: integer
+          description: The identifier of the first element in this page of the collection
+          format: int32
+        last:
+          type: integer
+          description: The identifier of the last element in this page of the collection
+          format: int32
+        limit:
+          type: integer
+          description: The maximum number of elements this page could contain
+          format: int32
+    Import:
+      type: object
+      description: Represents the process of copying a file from an external URL, (S)FTP server, or an Amazon S3 bucket.
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          description: The unique identifier assigned to the import
+          format: int32
+        key:
+          type: string
+          description: The API key used to create the import.
+        url:
+          type: string
+          description: The URL to the file being imported.
+        status:
+          type: string
+          description: The current status of the import
+          enum:
+          - initialising
+          - downloading
+          - successful
+          - failed
+          example: failed
+        failure:
+          $ref: '#/components/schemas/Failure'
+        file:
+          $ref: '#/components/schemas/File'
+        created_at:
+          type: string
+          description: The time at which the import was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
+          format: date-time
+        finished_at:
+          type: string
+          description: The time at which the import finished if successful, or null otherwise ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
+          format: date-time
+          nullable: true
+      example:
+        id: 1
+        key: apikey
+        url: http://www.example.com/logo.png
+        status: failed
+        failure:
+          code: 11
+          message: an invalid value was specified for a parameter
+          context:
+            parameter: url
+            reason: http URLs must not include a password (use https instead)
+        created_at: '2022-01-01T14:15:22Z'
+        finished_at: '2022-01-01T14:15:22Z'
+    File:
+      type: object
+      description: Represents a file which has been uploaded, imported or converted.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: integer
+          description: The unique identifier assigned to the file
+          format: int32
+        key:
+          type: string
+          description: The API key which was used to create the file
+        name:
+          type: string
+          description: The name that was specified for the file (must not be more than 256 chars)
+        size:
+          type: integer
+          format: int64
+          description: The size of the file in bytes, derived from the content of the file
+        format:
+          type: string
+          description: The identifier of the format of the file
+        created_at:
+          type: string
+          description: The time at which the file was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
+          format: date-time
+      example:
+        id: 3
+        key: apikey
+        name: filename.jpg
+        size: 4096
+        format: jpg
+        created_at: '2022-01-01T14:15:22Z'
+    Export:
+      type: object
+      description: An object representing the process of copying converted files to the location specified in the `export_url` (when submitting a job via the `/jobs` endpoint). The `status` will be set to `initialising` or `successful`.
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          description: The unique identifier assigned to the export
+          format: int32
+        url:
+          type: string
+          description: The URL of the resulting (exported) file
+        status:
+          type: string
+          description: The current status of the export
+          enum:
+          - initialising
+          - uploading
+          - successful
+          - failed
+          example: successful
+        failure:
+          $ref: '#/components/schemas/Failure'
+      example:
+        id: 1
+        url: s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg
+        status: successful
+    Exports:
+      type: array
+      description: An array of objects representing the process of copying converted files to the location specified in the export_url (when submitting a job via the `/jobs` endpoint)
+      items:
+        $ref: '#/components/schemas/Export'
+    Jobs:
+      type: object
+      description: Contains a paged collection of job objects. Newer jobs appear before older jobs.
+      properties:
+        paging:
+          $ref: '#/components/schemas/PagingNumeric'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+    Failure:
+      type: object
+      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
+      properties:
+        code:
+          type: integer
+          description: Can be used to determine what action to take
+          format: int32
+        message:
+          type: string
+          description: Provides an explanation of the failure (which could also be displayed to your users)
+      example:
+        code: 5
+        message: A file named portrait.png already exists
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+externalDocs:
+  description: Find out more about the Zamzar API
+  url: https://developers.zamzar.com/docs

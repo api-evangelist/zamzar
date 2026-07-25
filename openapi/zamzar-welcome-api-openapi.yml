@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Zamzar Account Welcome API
+  description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
+  termsOfService: http://developers.zamzar.com
+  contact:
+    email: api-sdks@zamzar.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.7
+servers:
+- url: https://api.zamzar.com/v1
+  description: Production Server
+- url: https://sandbox.zamzar.com/v1
+  description: Test Server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Welcome
+  description: Get started with the Zamzar API
+paths:
+  /:
+    get:
+      summary: Welcome
+      operationId: welcome
+      responses:
+        '200':
+          description: Welcome to the Zamzar API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Welcome message
+                    example: Welcome to the Zamzar API
+        '401':
+          $ref: '#/components/responses/401'
+      description: Prints a welcome message; useful for checking connectivity to the API
+      tags:
+      - Welcome
+components:
+  schemas:
+    Errors:
+      type: object
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
+      properties:
+        code:
+          type: integer
+          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
+          format: int32
+          example: 22
+        message:
+          type: string
+          description: The description of the error
+          example: unrecognised API version
+        context:
+          type: object
+          description: Further information about the cause of the error (only included for some error codes)
+          properties:
+            description:
+              type: string
+            value:
+              type: string
+          example:
+            requested_version: v42
+            supported_versions: v1
+      example:
+        message: an invalid value was specified for a parameter
+        code: 10
+        context:
+          parameter: target_format
+          reason: applescript is not a supported format
+  responses:
+    '401':
+      description: Forbidden - the request is not using authentication. The response will include an array of `errors`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          example:
+            errors:
+            - code: 21
+              message: resource does not exist
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+externalDocs:
+  description: Find out more about the Zamzar API
+  url: https://developers.zamzar.com/docs

@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: Zamzar Account API
+  description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
+  termsOfService: http://developers.zamzar.com
+  contact:
+    email: api-sdks@zamzar.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 0.0.7
+servers:
+- url: https://api.zamzar.com/v1
+  description: Production Server
+- url: https://sandbox.zamzar.com/v1
+  description: Test Server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Account
+  description: View account and plan information
+paths:
+  /account:
+    get:
+      summary: Retrieve account information
+      operationId: getAccount
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Your account and plan information. Use the data within the response body or within the response headers to determine your current credits remaining for the current billing period.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          headers:
+            X-RateLimit-Limit:
+              $ref: '#/components/headers/X-RateLimit-Limit'
+            X-RateLimit-Remaining:
+              $ref: '#/components/headers/X-RateLimit-Remaining'
+            Zamzar-Credits-Remaining:
+              $ref: '#/components/headers/Zamzar-Credits-Remaining'
+            Zamzar-Test-Credits-Remaining:
+              $ref: '#/components/headers/Zamzar-Test-Credits-Remaining'
+        '401':
+          $ref: '#/components/responses/401'
+      description: Retrieve your account and plan information, including the number of production and test credits remaining for the current billing period.
+components:
+  schemas:
+    Errors:
+      type: object
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
+      properties:
+        code:
+          type: integer
+          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
+          format: int32
+          example: 22
+        message:
+          type: string
+          description: The description of the error
+          example: unrecognised API version
+        context:
+          type: object
+          description: Further information about the cause of the error (only included for some error codes)
+          properties:
+            description:
+              type: string
+            value:
+              type: string
+          example:
+            requested_version: v42
+            supported_versions: v1
+      example:
+        message: an invalid value was specified for a parameter
+        code: 10
+        context:
+          parameter: target_format
+          reason: applescript is not a supported format
+    Account:
+      type: object
+      description: Your current subscription plan and the number of conversions that you have remaining in this billing period.
+      properties:
+        test_credits_remaining:
+          type: integer
+          description: The number of test conversion credits remaining in this billing period (free)
+          format: int32
+        credits_remaining:
+          type: integer
+          description: The number of conversion credits remaining in this billing period (included as part of your plan)
+          format: int32
+        plan:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name used to describe this plan
+            price_per_month:
+              type: number
+              description: The monthly subscription cost for this plan
+              format: float
+            conversions_per_month:
+              type: integer
+              description: The number of conversion credits included in this plan per month
+              format: int32
+            maximum_file_size:
+              type: integer
+              description: The maximum size (in bytes) of files that can be uploaded with this plan; or `null` if this plan has no such cap.
+              format: int64
+              nullable: true
+      example:
+        test_credits_remaining: 98
+        credits_remaining: 97
+        plan:
+          name: Free
+          price_per_month: 0
+          conversions_per_month: 100
+          maximum_file_size: 1024
+  headers:
+    X-RateLimit-Remaining:
+      description: The number of remaining requests in the current period
+      schema:
+        type: integer
+      example: 597
+    Zamzar-Test-Credits-Remaining:
+      description: The number of test credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 90
+    Zamzar-Credits-Remaining:
+      description: The number of production credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 100
+    X-RateLimit-Limit:
+      description: The number of allowed requests in the current period
+      schema:
+        type: integer
+      example: 600
+  responses:
+    '401':
+      description: Forbidden - the request is not using authentication. The response will include an array of `errors`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          example:
+            errors:
+            - code: 21
+              message: resource does not exist
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+externalDocs:
+  description: Find out more about the Zamzar API
+  url: https://developers.zamzar.com/docs
