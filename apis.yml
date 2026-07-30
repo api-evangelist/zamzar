@@ -6,7 +6,20 @@ description: >
   over 1,100 distinct format conversions processed asynchronously using a credit-based
   billing model. File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
   Both a production environment and a sandbox environment are provided for development.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/zamzar.png
 url: https://raw.githubusercontent.com/api-evangelist/zamzar/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -21,35 +34,126 @@ tags:
   - CAD
   - REST API
 apis:
-  - aid: zamzar:zamzar-api
-    name: Zamzar File Conversion API
-    description: >
-      REST API for converting files between 100+ formats asynchronously. Supports documents,
-      videos, audio, images, CAD files, and eBooks with over 1,100 distinct conversion paths.
-      File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developers.zamzar.com/
-    baseURL: https://api.zamzar.com/v1/
-    tags:
-      - File Conversion
-      - Documents
-      - Video
-      - Audio
-      - Images
-      - CAD
-    properties:
-      - type: Documentation
-        url: https://developers.zamzar.com/docs
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/zamzar/zamzar-spec/main/openapi/spec.yaml
-      - type: Authentication
-        url: https://developers.zamzar.com/docs#authentication
-      - type: Plans
-        url: plans/zamzar-plans-pricing.yml
-      - type: RateLimits
-        url: rate-limits/zamzar-rate-limits.yml
-      - type: FinOps
-        url: finops/zamzar-finops.yml
+- aid: zamzar:zamzar-account-api
+  name: Zamzar Account API
+  description: View account and plan information
+  humanURL: https://developers.zamzar.com/
+  baseURL: https://api.zamzar.com/v1/
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/zamzar-account-api-openapi.yml
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: Authentication
+    url: https://developers.zamzar.com/docs#authentication
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
+- aid: zamzar:zamzar-files-api
+  name: Zamzar Files API
+  description: Create, retrieve or delete files
+  humanURL: https://developers.zamzar.com/
+  baseURL: https://api.zamzar.com/v1/
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/zamzar-files-api-openapi.yml
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: Authentication
+    url: https://developers.zamzar.com/docs#authentication
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
+- aid: zamzar:zamzar-formats-api
+  name: Zamzar Formats API
+  description: List supported source and target formats
+  humanURL: https://developers.zamzar.com/
+  baseURL: https://api.zamzar.com/v1/
+  tags:
+  - Formats
+  properties:
+  - type: OpenAPI
+    url: openapi/zamzar-formats-api-openapi.yml
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: Authentication
+    url: https://developers.zamzar.com/docs#authentication
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
+- aid: zamzar:zamzar-imports-api
+  name: Zamzar Imports API
+  description: Import files from an external URL, (S)FTP server or Amazon S3 bucket
+  humanURL: https://developers.zamzar.com/
+  baseURL: https://api.zamzar.com/v1/
+  tags:
+  - Imports
+  properties:
+  - type: OpenAPI
+    url: openapi/zamzar-imports-api-openapi.yml
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: Authentication
+    url: https://developers.zamzar.com/docs#authentication
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
+- aid: zamzar:zamzar-jobs-api
+  name: Zamzar Jobs API
+  description: Start a new conversion job plus related operations
+  humanURL: https://developers.zamzar.com/
+  baseURL: https://api.zamzar.com/v1/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/zamzar-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: Authentication
+    url: https://developers.zamzar.com/docs#authentication
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
+- aid: zamzar:zamzar-welcome-api
+  name: Zamzar Welcome API
+  description: Get started with the Zamzar API
+  humanURL: https://developers.zamzar.com/
+  baseURL: https://api.zamzar.com/v1/
+  tags:
+  - Welcome
+  properties:
+  - type: OpenAPI
+    url: openapi/zamzar-welcome-api-openapi.yml
+  - type: Documentation
+    url: https://developers.zamzar.com/docs
+  - type: Authentication
+    url: https://developers.zamzar.com/docs#authentication
+  - type: Plans
+    url: plans/zamzar-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/zamzar-rate-limits.yml
+  - type: FinOps
+    url: finops/zamzar-finops.yml
 common:
   - type: AgenticAccess
     url: agentic-access/zamzar-agentic-access.yml
