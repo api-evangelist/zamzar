@@ -1,0 +1,24 @@
+{
+  "provider": "zamzar",
+  "sources": [
+    "zamzar-account-api-openapi.yml",
+    "zamzar-files-api-openapi.yml",
+    "zamzar-formats-api-openapi.yml",
+    "zamzar-imports-api-openapi.yml",
+    "zamzar-jobs-api-openapi.yml",
+    "zamzar-welcome-api-openapi.yml"
+  ],
+  "outputs": [
+    "zamzar-account-api-openapi.yml",
+    "zamzar-files-api-openapi.yml",
+    "zamzar-formats-api-openapi.yml",
+    "zamzar-imports-api-openapi.yml",
+    "zamzar-jobs-api-openapi.yml",
+    "zamzar-welcome-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
