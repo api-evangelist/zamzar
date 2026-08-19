@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "921207c9-1cec-411f-94c5-e02d26ce7485",
+      "name": "Imports",
+      "description": {
+        "content": "Import files from an external URL, (S)FTP server or Amazon S3 bucket",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a9e4d67-2825-430b-a23f-1883f004586a",
+          "name": "Retrieve a list of all imports",
+          "request": {
+            "name": "Retrieve a list of all imports",
+            "description": {
+              "content": "Retrieve a list of all imports",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of results (max 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "Retrieve imports after the specified importId"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<integer>",
+                  "description": "Retrieve imports before the specified importId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9085991b-ed36-4d7d-8abe-6458581e4a13",
+              "name": "A list of all imports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paging\": {\n    \"total_count\": 9616,\n    \"first\": 7390,\n    \"last\": 9224,\n    \"limit\": 8864\n  },\n  \"data\": [\n    {\n      \"id\": 1,\n      \"key\": \"apikey\",\n      \"url\": \"http://www.example.com/logo.png\",\n      \"status\": \"failed\",\n      \"failure\": {\n        \"code\": 11,\n        \"message\": \"an invalid value was specified for a parameter\",\n        \"context\": {\n          \"parameter\": \"url\",\n          \"reason\": \"http URLs must not include a password (use https instead)\"\n        }\n      },\n      \"created_at\": \"2022-01-01T14:15:22Z\",\n      \"finished_at\": \"2022-01-01T14:15:22Z\"\n    },\n    {\n      \"id\": 1,\n      \"key\": \"apikey\",\n      \"url\": \"http://www.example.com/logo.png\",\n      \"status\": \"failed\",\n      \"failure\": {\n        \"code\": 11,\n        \"message\": \"an invalid value was specified for a parameter\",\n        \"context\": {\n          \"parameter\": \"url\",\n          \"reason\": \"http URLs must not include a password (use https instead)\"\n        }\n      },\n      \"created_at\": \"2022-01-01T14:15:22Z\",\n      \"finished_at\": \"2022-01-01T14:15:22Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc609c73-9389-4d85-8f2b-f80d04f42f55",
+              "name": "Gateway Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9b15631-1101-42b8-9317-7860b553d249",
+          "name": "Start an Import",
+          "request": {
+            "name": "Start an Import",
+            "description": {
+              "content": "Start an Import",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<string>",
+                  "description": "(Required) Provide a url in the form HTTP(S), (S)FTP or S3"
+                },
+                {
+                  "disabled": false,
+                  "key": "filename",
+                  "value": "<string>",
+                  "description": "Override the filename provided in the url"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7668c9e1-fe35-4c9f-9f68-d4c8b400ffba",
+              "name": "Import submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Provide a url in the form HTTP(S), (S)FTP or S3",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Override the filename provided in the url",
+                        "type": "text/plain"
+                      },
+                      "key": "filename",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"apikey\",\n  \"url\": \"http://www.example.com/logo.png\",\n  \"status\": \"failed\",\n  \"failure\": {\n    \"code\": 11,\n    \"message\": \"an invalid value was specified for a parameter\",\n    \"context\": {\n      \"parameter\": \"url\",\n      \"reason\": \"http URLs must not include a password (use https instead)\"\n    }\n  },\n  \"created_at\": \"2022-01-01T14:15:22Z\",\n  \"finished_at\": \"2022-01-01T14:15:22Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e52f8915-7598-41e4-882c-a611c3e7e81e",
+          "name": "Retrieve a specific import",
+          "request": {
+            "name": "Retrieve a specific import",
+            "description": {
+              "content": "Retriefe a specific import",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "imports",
+                ":importId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "importId",
+                  "description": "(Required) Numeric id of the import to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c59cb859-076f-4982-ac48-23c998289a10",
+              "name": "Information about a specific import",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "imports",
+                    ":importId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "importId",
+                      "description": "(Required) Numeric id of the import to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"apikey\",\n  \"url\": \"http://www.example.com/logo.png\",\n  \"status\": \"failed\",\n  \"failure\": {\n    \"code\": 11,\n    \"message\": \"an invalid value was specified for a parameter\",\n    \"context\": {\n      \"parameter\": \"url\",\n      \"reason\": \"http URLs must not include a password (use https instead)\"\n    }\n  },\n  \"created_at\": \"2022-01-01T14:15:22Z\",\n  \"finished_at\": \"2022-01-01T14:15:22Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zamzar.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "da5c0191-3124-4938-91cc-a0cb252e085e",
+    "name": "Zamzar Account Imports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.\n\nContact Support:\n Email: api-sdks@zamzar.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zamzar Account Formats API",
+    "version": "0.0.7"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Formats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all formats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/formats",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of results (max 50)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve formats after the specified format"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve formats before the specified format"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all source formats which have one or more target (conversion) formats."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/formats/:format",
+            "params": [
+              {
+                "name": "format",
+                "value": "doc",
+                "type": "path",
+                "description": "The format to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific format and the cost of performing a conversion to one or more target formats.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

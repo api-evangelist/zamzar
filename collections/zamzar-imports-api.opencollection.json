@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zamzar Account Imports API",
+    "version": "0.0.7"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Imports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all imports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/imports",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of results (max 50)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve imports after the specified importId"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve imports before the specified importId"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all imports"
+        },
+        {
+          "info": {
+            "name": "Start an Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zamzar.com/v1/imports",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "url",
+                  "value": ""
+                },
+                {
+                  "name": "filename",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Start an Import"
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/imports/:importId",
+            "params": [
+              {
+                "name": "importId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric id of the import to get"
+              }
+            ]
+          },
+          "docs": "Retriefe a specific import"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

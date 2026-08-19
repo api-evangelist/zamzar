@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zamzar Account Jobs API",
+    "version": "0.0.7"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/jobs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query",
+                "description": "Limit the number of results (max 50)"
+              },
+              {
+                "name": "after",
+                "value": "42",
+                "type": "query",
+                "description": "Retrieve jobs after the specified jobId"
+              },
+              {
+                "name": "before",
+                "value": "42",
+                "type": "query",
+                "description": "Retrieve jobs after the specified jobId"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all jobs"
+        },
+        {
+          "info": {
+            "name": "Submit a conversion job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zamzar.com/v1/jobs",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Submit a conversion job for a local file, an uploaded file, a remote URL or S3 bucket.\n\n### Starting a job for a local file\nTo start a conversion job and upload a source file in a single request, issue a multipart POST request to the jobs endpoint. One part of the request should specify the target format and (optionally) a source format:\n\n - `source_file`: The binary data of the source file containing the following headers:\n   - `Content-Type` - an Internet media type that indicates the format o"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of all successful jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/jobs/successful",
+            "params": [
+              {
+                "name": "limit",
+                "value": "25",
+                "type": "query",
+                "description": "Limit the number of results (max 50)"
+              },
+              {
+                "name": "after",
+                "value": "42",
+                "type": "query",
+                "description": "Retrieve jobs after the specified jobId"
+              },
+              {
+                "name": "before",
+                "value": "42",
+                "type": "query",
+                "description": "Retrieve jobs after the specified jobId"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all successful jobs"
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric id of the job to get"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific job"
+        },
+        {
+          "info": {
+            "name": "Cancel a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.zamzar.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric id of the job to cancel"
+              }
+            ]
+          },
+          "docs": "Cancel a job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

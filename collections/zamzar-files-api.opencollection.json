@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zamzar Account Files API",
+    "version": "0.0.7"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a list of files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/files",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of results (max 50)"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve files after the specified fileId"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve files before the specified fileId"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of files which have been uploaded, imported or submitted for conversion. Files are ordered by the most recent first. Expired files are not included."
+        },
+        {
+          "info": {
+            "name": "Upload a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.zamzar.com/v1/files",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a local file which can be used as input to a conversion job. Ensure the file is a [format supported by the API](https://developers.zamzar.com/formats) and does not exceed the maximum size of [your plan](https://developers.zamzar.com/user)."
+        },
+        {
+          "info": {
+            "name": "Retrieve metadata for a specific file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "123456",
+                "type": "path",
+                "description": "Numeric id of the file to get"
+              }
+            ]
+          },
+          "docs": "Retrieve the metadata for a file which has been uploaded, imported or converted."
+        },
+        {
+          "info": {
+            "name": "Delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.zamzar.com/v1/files/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "123456",
+                "type": "path",
+                "description": "Numeric id of the file to delete"
+              }
+            ]
+          },
+          "docs": "Delete our copy of a file which has been uploaded, imported or converted."
+        },
+        {
+          "info": {
+            "name": "Retrieve the content of a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/files/:fileId/content",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "123456",
+                "type": "path",
+                "description": "Numeric id of the file to get the content for"
+              }
+            ]
+          },
+          "docs": "Retrieve the contents of a file which has been converted using the `/jobs` endpoint. The content of files which have been uploaded or converted can also be retrieved."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

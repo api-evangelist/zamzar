@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Zamzar Account Welcome API",
+    "version": "0.0.7"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Welcome",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Welcome",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.zamzar.com/v1/"
+          },
+          "docs": "Prints a welcome message; useful for checking connectivity to the API"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

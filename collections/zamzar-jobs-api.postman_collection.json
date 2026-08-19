@@ -1,0 +1,621 @@
+{
+  "item": [
+    {
+      "id": "6da325ce-aa05-400e-83db-738bcb74222e",
+      "name": "Jobs",
+      "description": {
+        "content": "Start a new conversion job plus related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cba957c-9a0e-4412-96ab-94611a55655a",
+          "name": "Retrieve a list of all jobs",
+          "request": {
+            "name": "Retrieve a list of all jobs",
+            "description": {
+              "content": "Retrieve a list of all jobs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Limit the number of results (max 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "Retrieve jobs after the specified jobId"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<integer>",
+                  "description": "Retrieve jobs after the specified jobId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f500397d-eb62-49d4-89a7-c4ad03867f2f",
+              "name": "A list of all jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "after",
+                      "value": "42"
+                    },
+                    {
+                      "key": "before",
+                      "value": "42"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paging\": {\n    \"total_count\": 3537,\n    \"first\": 71,\n    \"last\": 6341,\n    \"limit\": 3060\n  },\n  \"data\": [\n    {\n      \"id\": 1,\n      \"key\": \"apikey\",\n      \"status\": \"failed\",\n      \"failure\": {\n        \"code\": 5,\n        \"message\": \"A file named portrait.png already exists\"\n      },\n      \"sandbox\": false,\n      \"created_at\": \"2022-01-01T14:15:22Z\",\n      \"finished_at\": \"2022-01-01T14:15:22Z\",\n      \"import\": {\n        \"id\": 1,\n        \"key\": \"apikey\",\n        \"url\": \"http://www.example.com/logo.png\",\n        \"status\": \"failed\",\n        \"failure\": {\n          \"code\": 11,\n          \"message\": \"an invalid value was specified for a parameter\",\n          \"context\": {\n            \"parameter\": \"url\",\n            \"reason\": \"http URLs must not include a password (use https instead)\"\n          }\n        },\n        \"created_at\": \"2022-01-01T14:15:22Z\",\n        \"finished_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"source_file\": {\n        \"id\": 3,\n        \"key\": \"apikey\",\n        \"name\": \"filename.jpg\",\n        \"size\": 4096,\n        \"format\": \"jpg\",\n        \"created_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"target_files\": [\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        },\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        }\n      ],\n      \"target_format\": \"bmp\",\n      \"credit_cost\": 1,\n      \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"exports\": [\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        },\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        }\n      ],\n      \"options\": {\n        \"key_0\": \"string\",\n        \"key_1\": 26.407062777838995\n      }\n    },\n    {\n      \"id\": 1,\n      \"key\": \"apikey\",\n      \"status\": \"failed\",\n      \"failure\": {\n        \"code\": 5,\n        \"message\": \"A file named portrait.png already exists\"\n      },\n      \"sandbox\": false,\n      \"created_at\": \"2022-01-01T14:15:22Z\",\n      \"finished_at\": \"2022-01-01T14:15:22Z\",\n      \"import\": {\n        \"id\": 1,\n        \"key\": \"apikey\",\n        \"url\": \"http://www.example.com/logo.png\",\n        \"status\": \"failed\",\n        \"failure\": {\n          \"code\": 11,\n          \"message\": \"an invalid value was specified for a parameter\",\n          \"context\": {\n            \"parameter\": \"url\",\n            \"reason\": \"http URLs must not include a password (use https instead)\"\n          }\n        },\n        \"created_at\": \"2022-01-01T14:15:22Z\",\n        \"finished_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"source_file\": {\n        \"id\": 3,\n        \"key\": \"apikey\",\n        \"name\": \"filename.jpg\",\n        \"size\": 4096,\n        \"format\": \"jpg\",\n        \"created_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"target_files\": [\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        },\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        }\n      ],\n      \"target_format\": \"bmp\",\n      \"credit_cost\": 1,\n      \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"exports\": [\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        },\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        }\n      ],\n      \"options\": {\n        \"key_0\": 950.8366087472452\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c80c94b-a14d-4608-b42a-b9547b959619",
+          "name": "Submit a conversion job",
+          "request": {
+            "name": "Submit a conversion job",
+            "description": {
+              "content": "Submit a conversion job for a local file, an uploaded file, a remote URL or S3 bucket.\n\n### Starting a job for a local file\nTo start a conversion job and upload a source file in a single request, issue a multipart POST request to the jobs endpoint. One part of the request should specify the target format and (optionally) a source format:\n\n - `source_file`: The binary data of the source file containing the following headers:\n   - `Content-Type` - an Internet media type that indicates the format of the data in the body of the request\n   - `Content-Length` - the size, in bytes, of the data in the body of the request\n - `target_format`: the identifying name of the format that `source_file` will be converted to\n - `source_format`: optionally the identifying name of the format of the `source_file` (and is used to specify a source format that is different to the extension of the `source_file`)\n\n### Starting a job for a url\nTo start a conversion job for a source file that resides on another server, issue a POST request to the jobs endpoint with the following parameters:\n\n  - `source_file`: The url of the file to be converted. Examples:\n    - `http://www.example.com/logo.png`\n    - `https://www.example.com/logo.png`\n    - `https://username:password@www.example.com/logo.png`\n    - `ftp://ftp.example.com/logo.png`\n    - `ftp://username:password@ftp.example.com/logo.png`\n    - `sftp://username:password@sftp.example.com/logo.png`\n  - `target_format`: the identifying name of the format that `source_file` will be converted to\n  - `source_format`: optionally the identifying name of the format of the `source_file` (and is used to specify a source format that is different to the extension of the `source_file`)\n\n### Starting a job for an Amazon S3 file\nTo start a conversion job for a source file that resides on Amazon's Simple Storage Service (S3), first determine whether you need to setup any credentials to access the file. If needed you can configure access to Amazon S3 via the [Connected Services](https://developers.zamzar.com/user/services) page.\n\nNext, determine the S3 URL to send to our API. The S3 URL will use one of the styles shown below. For private files, note that CREDENTIAL_NAME must match exactly the credential name you have used on the [Connected Services](https://developers.zamzar.com/user/services) page.\n\n  - Public file - `s3://my-bucket-name/logo.png`\n  - Private file - `s3://CREDENTIAL_NAME@my-bucket-name/logo.png`\n\nOnce you have determined the S3 URL, issue a POST request to the jobs endpoint with the following parameters:\n\n  - `source_file`: the Amazon S3 url of the file to be converted\n  - `target_format`: the identifying name of the format that `source_file` will be converted to\n  - `source_format`: optionally the identifying name of the format of the `source_file` (and is used to specify a source format that is different to the extension of the `source_file`)\n\n### Starting a job for a file which has already been uploaded\nTo start a job for a file that you’ve already uploaded to our servers, issue a POST request to the jobs endpoint, with the following arguments:\n\n  - `source_file`: the unique identifier of the file that will be converted\n  - `target_format`: the identifying name of the format that `source_file` will be converted to",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "source_file",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "target_format",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "source_format",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "export_url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "undefined"
+                },
+                {
+                  "key": "options",
+                  "value": "{\"key_0\":5617,\"key_1\":true}",
+                  "type": "text",
+                  "description": "undefined"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2c5b150-41e8-4b78-a7f5-3630f5bfc239",
+              "name": "Job submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "source_file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "target_format",
+                      "value": "bmp",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "source_format",
+                      "value": "png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "export_url",
+                      "value": "s3://CREDENTIAL_NAME@my-bucket-name/logo.png",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "undefined",
+                        "type": "text/plain"
+                      },
+                      "key": "options",
+                      "value": "{\"key_0\":1727}",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"apikey\",\n  \"status\": \"failed\",\n  \"failure\": {\n    \"code\": 5,\n    \"message\": \"A file named portrait.png already exists\"\n  },\n  \"sandbox\": false,\n  \"created_at\": \"2022-01-01T14:15:22Z\",\n  \"finished_at\": \"2022-01-01T14:15:22Z\",\n  \"import\": {\n    \"id\": 1,\n    \"key\": \"apikey\",\n    \"url\": \"http://www.example.com/logo.png\",\n    \"status\": \"failed\",\n    \"failure\": {\n      \"code\": 11,\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"context\": {\n        \"parameter\": \"url\",\n        \"reason\": \"http URLs must not include a password (use https instead)\"\n      }\n    },\n    \"created_at\": \"2022-01-01T14:15:22Z\",\n    \"finished_at\": \"2022-01-01T14:15:22Z\"\n  },\n  \"source_file\": {\n    \"id\": 3,\n    \"key\": \"apikey\",\n    \"name\": \"filename.jpg\",\n    \"size\": 4096,\n    \"format\": \"jpg\",\n    \"created_at\": \"2022-01-01T14:15:22Z\"\n  },\n  \"target_files\": [\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    },\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    }\n  ],\n  \"target_format\": \"bmp\",\n  \"credit_cost\": 1,\n  \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n  \"exports\": [\n    {\n      \"id\": 1,\n      \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"status\": \"successful\"\n    },\n    {\n      \"id\": 1,\n      \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"status\": \"successful\"\n    }\n  ],\n  \"options\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33fcc3bc-c55a-476c-913b-50ac9215deac",
+          "name": "Retrieve a list of all successful jobs",
+          "request": {
+            "name": "Retrieve a list of all successful jobs",
+            "description": {
+              "content": "Retrieve a list of all successful jobs",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                "successful"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Limit the number of results (max 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "Retrieve jobs after the specified jobId"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<integer>",
+                  "description": "Retrieve jobs after the specified jobId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ac0fa68-2f4f-45a8-b1af-2fae2fd551da",
+              "name": "A list of all successful jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "successful"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "after",
+                      "value": "42"
+                    },
+                    {
+                      "key": "before",
+                      "value": "42"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paging\": {\n    \"total_count\": 6473,\n    \"first\": 1088,\n    \"last\": 6543,\n    \"limit\": 4193\n  },\n  \"data\": [\n    {\n      \"id\": 1,\n      \"key\": \"apikey\",\n      \"status\": \"failed\",\n      \"failure\": {\n        \"code\": 5,\n        \"message\": \"A file named portrait.png already exists\"\n      },\n      \"sandbox\": false,\n      \"created_at\": \"2022-01-01T14:15:22Z\",\n      \"finished_at\": \"2022-01-01T14:15:22Z\",\n      \"import\": {\n        \"id\": 1,\n        \"key\": \"apikey\",\n        \"url\": \"http://www.example.com/logo.png\",\n        \"status\": \"failed\",\n        \"failure\": {\n          \"code\": 11,\n          \"message\": \"an invalid value was specified for a parameter\",\n          \"context\": {\n            \"parameter\": \"url\",\n            \"reason\": \"http URLs must not include a password (use https instead)\"\n          }\n        },\n        \"created_at\": \"2022-01-01T14:15:22Z\",\n        \"finished_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"source_file\": {\n        \"id\": 3,\n        \"key\": \"apikey\",\n        \"name\": \"filename.jpg\",\n        \"size\": 4096,\n        \"format\": \"jpg\",\n        \"created_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"target_files\": [\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        },\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        }\n      ],\n      \"target_format\": \"bmp\",\n      \"credit_cost\": 1,\n      \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"exports\": [\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        },\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        }\n      ],\n      \"options\": {\n        \"key_0\": 6782.426639534648,\n        \"key_1\": 5856.072313549917,\n        \"key_2\": \"string\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"key\": \"apikey\",\n      \"status\": \"failed\",\n      \"failure\": {\n        \"code\": 5,\n        \"message\": \"A file named portrait.png already exists\"\n      },\n      \"sandbox\": false,\n      \"created_at\": \"2022-01-01T14:15:22Z\",\n      \"finished_at\": \"2022-01-01T14:15:22Z\",\n      \"import\": {\n        \"id\": 1,\n        \"key\": \"apikey\",\n        \"url\": \"http://www.example.com/logo.png\",\n        \"status\": \"failed\",\n        \"failure\": {\n          \"code\": 11,\n          \"message\": \"an invalid value was specified for a parameter\",\n          \"context\": {\n            \"parameter\": \"url\",\n            \"reason\": \"http URLs must not include a password (use https instead)\"\n          }\n        },\n        \"created_at\": \"2022-01-01T14:15:22Z\",\n        \"finished_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"source_file\": {\n        \"id\": 3,\n        \"key\": \"apikey\",\n        \"name\": \"filename.jpg\",\n        \"size\": 4096,\n        \"format\": \"jpg\",\n        \"created_at\": \"2022-01-01T14:15:22Z\"\n      },\n      \"target_files\": [\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        },\n        {\n          \"id\": 3,\n          \"key\": \"apikey\",\n          \"name\": \"filename.jpg\",\n          \"size\": 4096,\n          \"format\": \"jpg\",\n          \"created_at\": \"2022-01-01T14:15:22Z\"\n        }\n      ],\n      \"target_format\": \"bmp\",\n      \"credit_cost\": 1,\n      \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"exports\": [\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        },\n        {\n          \"id\": 1,\n          \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n          \"status\": \"successful\"\n        }\n      ],\n      \"options\": {\n        \"key_0\": false,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77103336-6d0d-42d6-9cc8-34de1e7c1409",
+          "name": "Retrieve a specific job",
+          "request": {
+            "name": "Retrieve a specific job",
+            "description": {
+              "content": "Retrieve a specific job",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "jobId",
+                  "description": "(Required) Numeric id of the job to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "829a1d82-2ef7-4705-bbbd-8295e76a8d96",
+              "name": "Information about a specific job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "jobId",
+                      "description": "(Required) Numeric id of the job to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"apikey\",\n  \"status\": \"failed\",\n  \"failure\": {\n    \"code\": 5,\n    \"message\": \"A file named portrait.png already exists\"\n  },\n  \"sandbox\": false,\n  \"created_at\": \"2022-01-01T14:15:22Z\",\n  \"finished_at\": \"2022-01-01T14:15:22Z\",\n  \"import\": {\n    \"id\": 1,\n    \"key\": \"apikey\",\n    \"url\": \"http://www.example.com/logo.png\",\n    \"status\": \"failed\",\n    \"failure\": {\n      \"code\": 11,\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"context\": {\n        \"parameter\": \"url\",\n        \"reason\": \"http URLs must not include a password (use https instead)\"\n      }\n    },\n    \"created_at\": \"2022-01-01T14:15:22Z\",\n    \"finished_at\": \"2022-01-01T14:15:22Z\"\n  },\n  \"source_file\": {\n    \"id\": 3,\n    \"key\": \"apikey\",\n    \"name\": \"filename.jpg\",\n    \"size\": 4096,\n    \"format\": \"jpg\",\n    \"created_at\": \"2022-01-01T14:15:22Z\"\n  },\n  \"target_files\": [\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    },\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    }\n  ],\n  \"target_format\": \"bmp\",\n  \"credit_cost\": 1,\n  \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n  \"exports\": [\n    {\n      \"id\": 1,\n      \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"status\": \"successful\"\n    },\n    {\n      \"id\": 1,\n      \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"status\": \"successful\"\n    }\n  ],\n  \"options\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65975540-2c62-4d5b-a184-bbeb8e07d8e3",
+          "name": "Cancel a job",
+          "request": {
+            "name": "Cancel a job",
+            "description": {
+              "content": "Cancel a job",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "jobId",
+                  "description": "(Required) Numeric id of the job to cancel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba1907e8-c2e1-45fc-9d95-902ec680de55",
+              "name": "Job cancelled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "jobId",
+                      "description": "(Required) Numeric id of the job to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"key\": \"apikey\",\n  \"status\": \"failed\",\n  \"failure\": {\n    \"code\": 5,\n    \"message\": \"A file named portrait.png already exists\"\n  },\n  \"sandbox\": false,\n  \"created_at\": \"2022-01-01T14:15:22Z\",\n  \"finished_at\": \"2022-01-01T14:15:22Z\",\n  \"import\": {\n    \"id\": 1,\n    \"key\": \"apikey\",\n    \"url\": \"http://www.example.com/logo.png\",\n    \"status\": \"failed\",\n    \"failure\": {\n      \"code\": 11,\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"context\": {\n        \"parameter\": \"url\",\n        \"reason\": \"http URLs must not include a password (use https instead)\"\n      }\n    },\n    \"created_at\": \"2022-01-01T14:15:22Z\",\n    \"finished_at\": \"2022-01-01T14:15:22Z\"\n  },\n  \"source_file\": {\n    \"id\": 3,\n    \"key\": \"apikey\",\n    \"name\": \"filename.jpg\",\n    \"size\": 4096,\n    \"format\": \"jpg\",\n    \"created_at\": \"2022-01-01T14:15:22Z\"\n  },\n  \"target_files\": [\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    },\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    }\n  ],\n  \"target_format\": \"bmp\",\n  \"credit_cost\": 1,\n  \"export_url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n  \"exports\": [\n    {\n      \"id\": 1,\n      \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"status\": \"successful\"\n    },\n    {\n      \"id\": 1,\n      \"url\": \"s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg\",\n      \"status\": \"successful\"\n    }\n  ],\n  \"options\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zamzar.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d5968415-0be8-44f9-b12d-409884e79c11",
+    "name": "Zamzar Account Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.\n\nContact Support:\n Email: api-sdks@zamzar.com",
+      "type": "text/plain"
+    }
+  }
+}

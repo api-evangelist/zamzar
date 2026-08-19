@@ -1,0 +1,799 @@
+{
+  "item": [
+    {
+      "id": "3ac6c5e2-ba1d-42d0-afdd-4b4061651c91",
+      "name": "Files",
+      "description": {
+        "content": "Create, retrieve or delete files",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a140f7b-c842-416e-b032-b189e49c76bf",
+          "name": "Retrieve a list of files",
+          "request": {
+            "name": "Retrieve a list of files",
+            "description": {
+              "content": "Retrieve a list of files which have been uploaded, imported or submitted for conversion. Files are ordered by the most recent first. Expired files are not included.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of results (max 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "Retrieve files after the specified fileId"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<integer>",
+                  "description": "Retrieve files before the specified fileId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50458583-ca33-4e5e-a5d2-066bfcee3850",
+              "name": "A list of source and associated target (converted) files within the `data` array.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "123456"
+                    },
+                    {
+                      "key": "before",
+                      "value": "123456"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The number of allowed requests in the current period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "600"
+                },
+                {
+                  "disabled": false,
+                  "description": "The number of remaining requests in the current period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "597"
+                },
+                {
+                  "disabled": false,
+                  "description": "The number of production credits remaining in the current billing period",
+                  "key": "Zamzar-Credits-Remaining",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "description": "The number of test credits remaining in the current billing period",
+                  "key": "Zamzar-Test-Credits-Remaining",
+                  "value": "90"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    },\n    {\n      \"id\": 3,\n      \"key\": \"apikey\",\n      \"name\": \"filename.jpg\",\n      \"size\": 4096,\n      \"format\": \"jpg\",\n      \"created_at\": \"2022-01-01T14:15:22Z\"\n    }\n  ],\n  \"paging\": {\n    \"total_count\": 4131,\n    \"first\": 5496,\n    \"last\": 8795,\n    \"limit\": 939\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46682f7d-9454-499a-b81f-659926b02f88",
+          "name": "Upload a file",
+          "request": {
+            "name": "Upload a file",
+            "description": {
+              "content": "Upload a local file which can be used as input to a conversion job. Ensure the file is a [format supported by the API](https://developers.zamzar.com/formats) and does not exceed the maximum size of [your plan](https://developers.zamzar.com/user).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "type": "file",
+                  "description": "Provide the file to be uploaded"
+                },
+                {
+                  "key": "name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Specify the name of the file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2002d937-5888-45be-928d-c089f57d06b6",
+              "name": "File uploaded successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Provide the file to be uploaded",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Specify the name of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3,\n  \"key\": \"apikey\",\n  \"name\": \"filename.jpg\",\n  \"size\": 4096,\n  \"format\": \"jpg\",\n  \"created_at\": \"2022-01-01T14:15:22Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81b7062d-d7ec-4179-b6ea-0a47f917edba",
+          "name": "Retrieve metadata for a specific file",
+          "request": {
+            "name": "Retrieve metadata for a specific file",
+            "description": {
+              "content": "Retrieve the metadata for a file which has been uploaded, imported or converted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) Numeric id of the file to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fc87aee-12cb-4d38-aeb5-963739a51f65",
+              "name": "Metadata for a specific file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3,\n  \"key\": \"apikey\",\n  \"name\": \"filename.jpg\",\n  \"size\": 4096,\n  \"format\": \"jpg\",\n  \"created_at\": \"2022-01-01T14:15:22Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58cf7365-8b70-4b20-ba26-dc3217b0d5c8",
+              "name": "Resource is not available because it has been deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"code\": 10,\n      \"context\": {\n        \"parameter\": \"target_format\",\n        \"reason\": \"applescript is not a supported format\"\n      }\n    },\n    {\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"code\": 10,\n      \"context\": {\n        \"parameter\": \"target_format\",\n        \"reason\": \"applescript is not a supported format\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efdbad29-ddf1-4d4b-ade7-a2913ecd328e",
+              "name": "Resource has expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gone",
+              "code": 410,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"code\": 10,\n      \"context\": {\n        \"parameter\": \"target_format\",\n        \"reason\": \"applescript is not a supported format\"\n      }\n    },\n    {\n      \"message\": \"an invalid value was specified for a parameter\",\n      \"code\": 10,\n      \"context\": {\n        \"parameter\": \"target_format\",\n        \"reason\": \"applescript is not a supported format\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb483a20-b207-4af1-9835-0d76c8ca31bc",
+          "name": "Delete a file",
+          "request": {
+            "name": "Delete a file",
+            "description": {
+              "content": "Delete our copy of a file which has been uploaded, imported or converted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) Numeric id of the file to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d2ad8ec-994e-4ce2-aa48-b3db0788c417",
+              "name": "File deleted successfully. The response will contain the metadata for the deleted file (but not the content).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 3,\n  \"key\": \"apikey\",\n  \"name\": \"filename.jpg\",\n  \"size\": 4096,\n  \"format\": \"jpg\",\n  \"created_at\": \"2022-01-01T14:15:22Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "190d9a85-92fe-4b39-9f40-09fb2090b071",
+          "name": "Retrieve the content of a file",
+          "request": {
+            "name": "Retrieve the content of a file",
+            "description": {
+              "content": "Retrieve the contents of a file which has been converted using the `/jobs` endpoint. The content of files which have been uploaded or converted can also be retrieved.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "files",
+                ":fileId",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "fileId",
+                  "description": "(Required) Numeric id of the file to get the content for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aaa0d872-34bb-4905-9ddd-5c72546551bd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to get the content for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Content-Disposition",
+                  "value": "attachment; filename=\"name.pdf\"",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1612c7fa-642a-42db-93cc-62105c171a2e",
+              "name": "The body of the response will contain the contents of a file in which case you can download the file data directly:\n\n```\nHTTP/1.1 200 OK\nContent-Length: 15311\nContent-Disposition: attachment; filename=\"portrait.png\"\nZamzar-Test-Credits-Remaining: 97\nZamzar-Credits-Remaining: 343\nContent-Type: image/png; charset=binary\n\n[Binary content of portrait.png]\n```\n\n### When using cURL\n\nSave the content of a file to disk using curl options `-L` (follow redirects), `-O` (Write output to a local file) and `-J` (use the server-specified Content-Disposition filename). Or specify your own filename by redirecting the output of your HTTP call:\n\n```shell\ncurl --request GET \\\n  --url https://api.zamzar.com/v1/files/123456/content \\\n  --header 'Authorization: Basic xxxxxx' \\\n  --header 'Content-Type: application/json' -L \\\n -L\n -O \\\n -J\n  > converted.png\n```",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to get the content for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "header-0",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce5e029d-d09b-4f07-a972-6b07c72210eb",
+              "name": "Instruct your client code to follow the redirect link specified in the `Location` header of the response in order to download the file:\n\n```\nHTTP/1.1 307 Temporary Redirect\nContent-Length: 0\nLocation: https://someotherlocation.com/file\nZamzar-Test-Credits-Remaining: 97\nZamzar-Credits-Remaining: 343\nContent-Type: application/json; charset=utf-8\n```\n\n### When using cUrl\n\nSave the content of a file to disk using curl options `-L` (follow redirects), `-O` (Write output to a local file) and `-J` (use the server-specified Content-Disposition filename). Or specify your own filename by redirecting the output of your HTTP call:\n\n```shell\ncurl --request GET \\\n  --url https://api.zamzar.com/v1/files/123456/content \\\n  --header 'Authorization: Basic xxxxxx' \\\n  --header 'Content-Type: application/json' -L \\\n -L\n -O \\\n -J\n  > converted.png\n```",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "files",
+                    ":fileId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "fileId",
+                      "description": "(Required) Numeric id of the file to get the content for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Temporary Redirect (since HTTP/1.1)",
+              "code": 307,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zamzar.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d038f50e-086e-4aee-89bd-3dc2f9550c27",
+    "name": "Zamzar Account Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.\n\nContact Support:\n Email: api-sdks@zamzar.com",
+      "type": "text/plain"
+    }
+  }
+}

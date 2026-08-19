@@ -1,0 +1,186 @@
+{
+  "item": [
+    {
+      "id": "754f0977-9b76-4e1f-8a04-74f883926c50",
+      "name": "Account",
+      "description": {
+        "content": "View account and plan information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3970897-a190-41a6-9ca1-d7b813eff9c9",
+          "name": "Retrieve account information",
+          "request": {
+            "name": "Retrieve account information",
+            "description": {
+              "content": "Retrieve your account and plan information, including the number of production and test credits remaining for the current billing period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "421f064d-f377-423d-93d8-7f285f038bc6",
+              "name": "Your account and plan information. Use the data within the response body or within the response headers to determine your current credits remaining for the current billing period.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The number of allowed requests in the current period",
+                  "key": "X-RateLimit-Limit",
+                  "value": "600"
+                },
+                {
+                  "disabled": false,
+                  "description": "The number of remaining requests in the current period",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "597"
+                },
+                {
+                  "disabled": false,
+                  "description": "The number of production credits remaining in the current billing period",
+                  "key": "Zamzar-Credits-Remaining",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "description": "The number of test credits remaining in the current billing period",
+                  "key": "Zamzar-Test-Credits-Remaining",
+                  "value": "90"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"test_credits_remaining\": 98,\n  \"credits_remaining\": 97,\n  \"plan\": {\n    \"name\": \"Free\",\n    \"price_per_month\": 0,\n    \"conversions_per_month\": 100,\n    \"maximum_file_size\": 1024\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68572692-9569-4185-b9ba-4de4f8278200",
+              "name": "Forbidden - the request is not using authentication. The response will include an array of `errors`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": 21,\n      \"message\": \"resource does not exist\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zamzar.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "524fe595-5b1f-4fe0-a9de-800ef2960e07",
+    "name": "Zamzar Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.\n\nContact Support:\n Email: api-sdks@zamzar.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "item": [
+    {
+      "id": "cd7469a8-f9ee-47e7-ab11-166ecca95df4",
+      "name": "Formats",
+      "description": {
+        "content": "List supported source and target formats",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91b84d8e-2f8f-4e41-9176-31dc3e0fb84e",
+          "name": "List all formats",
+          "request": {
+            "name": "List all formats",
+            "description": {
+              "content": "Retrieve a list of all source formats which have one or more target (conversion) formats.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of results (max 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "Retrieve formats after the specified format"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "Retrieve formats before the specified format"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d4df094-ecaf-4257-965d-56ab18446869",
+              "name": "Source formats are ordered alphabetically within the `data` array of formats and include the target formats and associated cost of conversion.\n\nA `paging` object is included within the results, with each page having a limit of 50 records by default. Request the next page by using the `after` parameter in reference to the `last` property within the paging object of the current response.\n\nFor example to retrieve the next page of formats after the `msg` format:\n\n```\nhttps://api.zamzar.com/v1/formats/?after=msg\n```\n\nTo limit the results to 10 records:\n\n```\nhttps://api.zamzar.com/v1/formats/?after=msg&limit=10\n```",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "after",
+                      "value": "mpg"
+                    },
+                    {
+                      "key": "before",
+                      "value": "mpg"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paging\": {\n    \"total_count\": 100,\n    \"first\": \"docx\",\n    \"last\": \"pdf\",\n    \"limit\": 50\n  },\n  \"data\": [\n    {\n      \"name\": \"doc\",\n      \"targets\": [\n        {\n          \"name\": \"docx\",\n          \"credit_cost\": 1\n        },\n        {\n          \"name\": \"pdf\",\n          \"credit_cost\": 1\n        }\n      ]\n    },\n    {\n      \"name\": \"doc\",\n      \"targets\": [\n        {\n          \"name\": \"docx\",\n          \"credit_cost\": 1\n        },\n        {\n          \"name\": \"pdf\",\n          \"credit_cost\": 1\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcb40bb5-18fd-46a3-bfb3-2cdaf5ae914a",
+          "name": "Retrieve a specific format",
+          "request": {
+            "name": "Retrieve a specific format",
+            "description": {
+              "content": "Retrieve a specific format and the cost of performing a conversion to one or more target formats.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formats",
+                ":format"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "format",
+                  "description": "(Required) The format to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "525ebb2d-7b48-45b7-be6b-c3baa2ab472c",
+              "name": "A specific source format and valid target formats.\n\n```json\n{\n  \"name\": \"doc\",\n  \"targets\": [\n    {\n      \"name\": \"docx\",\n      \"credit_cost\": 1\n    },\n    {\n      \"name\": \"pdf\",\n      \"credit_cost\": 1\n    }\n  ]\n}\n```",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formats",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) The format to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"doc\",\n  \"targets\": [\n    {\n      \"name\": \"docx\",\n      \"credit_cost\": 1\n    },\n    {\n      \"name\": \"pdf\",\n      \"credit_cost\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eed6427-1cd5-46e8-be1a-4f01ef0f0b2e",
+              "name": "Unsupported Format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formats",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) The format to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.zamzar.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2569b351-d5e6-40ee-9d9d-aa3a873602aa",
+    "name": "Zamzar Account Formats API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.\n\nContact Support:\n Email: api-sdks@zamzar.com",
+      "type": "text/plain"
+    }
+  }
+}
