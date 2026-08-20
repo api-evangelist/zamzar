@@ -30,6 +30,14 @@ tags:
   - Documents
   - Video
   - Audio
+  - Image
+  - CAD
+  - REST API
+tags_raw:
+  - File Conversion
+  - Documents
+  - Video
+  - Audio
   - Images
   - CAD
   - REST API
@@ -60,6 +68,8 @@ apis:
   humanURL: https://developers.zamzar.com/
   baseURL: https://api.zamzar.com/v1/
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -120,6 +130,8 @@ apis:
   humanURL: https://developers.zamzar.com/
   baseURL: https://api.zamzar.com/v1/
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
