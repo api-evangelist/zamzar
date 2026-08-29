@@ -6,6 +6,18 @@ description: >
   over 1,100 distinct format conversions processed asynchronously using a credit-based
   billing model. File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3.
   Both a production environment and a sandbox environment are provided for development.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
