@@ -123,6 +123,8 @@ apis:
   humanURL: https://developers.zamzar.com/
   baseURL: https://api.zamzar.com/v1/
   tags:
+  - Import
+  tags_raw:
   - Imports
   properties:
   - type: OpenAPI
