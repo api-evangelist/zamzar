@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Zamzar Account Imports API
+  title: Zamzar Imports API
   description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
   termsOfService: http://developers.zamzar.com
   contact:
@@ -25,7 +25,6 @@ paths:
       tags:
       - Imports
       summary: Retrieve a list of all imports
-      description: Retrieve a list of all imports
       operationId: listImports
       parameters:
       - in: query
@@ -59,7 +58,6 @@ paths:
       tags:
       - Imports
       summary: Start an Import
-      description: Start an Import
       operationId: startImport
       requestBody:
         description: Start an import for a HTTP/HTTPS url, (S)FTP file or S3 bucket
@@ -107,6 +105,41 @@ paths:
                 $ref: '#/components/schemas/Import'
 components:
   schemas:
+    File:
+      type: object
+      description: Represents a file which has been uploaded, imported or converted.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: integer
+          description: The unique identifier assigned to the file
+          format: int32
+        key:
+          type: string
+          description: The API key which was used to create the file
+        name:
+          type: string
+          description: The name that was specified for the file (must not be more than 256 chars)
+        size:
+          type: integer
+          format: int64
+          description: The size of the file in bytes, derived from the content of the file
+        format:
+          type: string
+          description: The identifier of the format of the file
+        created_at:
+          type: string
+          description: The time at which the file was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
+          format: date-time
+      example:
+        id: 3
+        key: apikey
+        name: filename.jpg
+        size: 4096
+        format: jpg
+        created_at: '2022-01-01T14:15:22Z'
     Imports:
       type: object
       description: Contains a paged collection of import objects. Newer imports appear before older imports.
@@ -118,6 +151,20 @@ components:
           description: An array of import objects
           items:
             $ref: '#/components/schemas/Import'
+    Failure:
+      type: object
+      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
+      properties:
+        code:
+          type: integer
+          description: Can be used to determine what action to take
+          format: int32
+        message:
+          type: string
+          description: Provides an explanation of the failure (which could also be displayed to your users)
+      example:
+        code: 5
+        message: A file named portrait.png already exists
     PagingNumeric:
       type: object
       properties:
@@ -171,10 +218,11 @@ components:
           description: The time at which the import was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
           format: date-time
         finished_at:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The time at which the import finished if successful, or null otherwise ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
           format: date-time
-          nullable: true
       example:
         id: 1
         key: apikey
@@ -188,55 +236,6 @@ components:
             reason: http URLs must not include a password (use https instead)
         created_at: '2022-01-01T14:15:22Z'
         finished_at: '2022-01-01T14:15:22Z'
-    File:
-      type: object
-      description: Represents a file which has been uploaded, imported or converted.
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: integer
-          description: The unique identifier assigned to the file
-          format: int32
-        key:
-          type: string
-          description: The API key which was used to create the file
-        name:
-          type: string
-          description: The name that was specified for the file (must not be more than 256 chars)
-        size:
-          type: integer
-          format: int64
-          description: The size of the file in bytes, derived from the content of the file
-        format:
-          type: string
-          description: The identifier of the format of the file
-        created_at:
-          type: string
-          description: The time at which the file was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
-          format: date-time
-      example:
-        id: 3
-        key: apikey
-        name: filename.jpg
-        size: 4096
-        format: jpg
-        created_at: '2022-01-01T14:15:22Z'
-    Failure:
-      type: object
-      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
-      properties:
-        code:
-          type: integer
-          description: Can be used to determine what action to take
-          format: int32
-        message:
-          type: string
-          description: Provides an explanation of the failure (which could also be displayed to your users)
-      example:
-        code: 5
-        message: A file named portrait.png already exists
   securitySchemes:
     ApiKeyAuth:
       type: http

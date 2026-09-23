@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Zamzar Account Files API
+  title: Zamzar Files API
   description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
   termsOfService: http://developers.zamzar.com
   contact:
@@ -91,7 +91,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/File'
-      description: Upload a local file which can be used as input to a conversion job. Ensure the file is a [format supported by the API](https://developers.zamzar.com/formats) and does not exceed the maximum size of [your plan](https://developers.zamzar.com/user).
+      description: Upload a local file which can be used as input to a conversion job. Ensure the file is a format supported by the API and does not exceed the maximum size of your plan.
   /files/{fileId}:
     get:
       tags:
@@ -188,74 +188,6 @@ paths:
       x-is-file: true
 components:
   schemas:
-    Errors:
-      type: object
-      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    PagingNumeric:
-      type: object
-      properties:
-        total_count:
-          type: integer
-          description: The number of elements in the entire collection
-          format: int32
-        first:
-          type: integer
-          description: The identifier of the first element in this page of the collection
-          format: int32
-        last:
-          type: integer
-          description: The identifier of the last element in this page of the collection
-          format: int32
-        limit:
-          type: integer
-          description: The maximum number of elements this page could contain
-          format: int32
-    Error:
-      type: object
-      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
-      properties:
-        code:
-          type: integer
-          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
-          format: int32
-          example: 22
-        message:
-          type: string
-          description: The description of the error
-          example: unrecognised API version
-        context:
-          type: object
-          description: Further information about the cause of the error (only included for some error codes)
-          properties:
-            description:
-              type: string
-            value:
-              type: string
-          example:
-            requested_version: v42
-            supported_versions: v1
-      example:
-        message: an invalid value was specified for a parameter
-        code: 10
-        context:
-          parameter: target_format
-          reason: applescript is not a supported format
-    Files:
-      type: object
-      description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
-      properties:
-        data:
-          type: array
-          description: An array of file objects
-          items:
-            $ref: '#/components/schemas/File'
-        paging:
-          $ref: '#/components/schemas/PagingNumeric'
     File:
       type: object
       description: Represents a file which has been uploaded, imported or converted.
@@ -291,6 +223,74 @@ components:
         size: 4096
         format: jpg
         created_at: '2022-01-01T14:15:22Z'
+    Error:
+      type: object
+      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
+      properties:
+        code:
+          type: integer
+          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
+          format: int32
+          example: 22
+        message:
+          type: string
+          description: The description of the error
+          example: unrecognised API version
+        context:
+          type: object
+          description: Further information about the cause of the error (only included for some error codes)
+          properties:
+            description:
+              type: string
+            value:
+              type: string
+          example:
+            requested_version: v42
+            supported_versions: v1
+      example:
+        message: an invalid value was specified for a parameter
+        code: 10
+        context:
+          parameter: target_format
+          reason: applescript is not a supported format
+    PagingNumeric:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: The number of elements in the entire collection
+          format: int32
+        first:
+          type: integer
+          description: The identifier of the first element in this page of the collection
+          format: int32
+        last:
+          type: integer
+          description: The identifier of the last element in this page of the collection
+          format: int32
+        limit:
+          type: integer
+          description: The maximum number of elements this page could contain
+          format: int32
+    Errors:
+      type: object
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Files:
+      type: object
+      description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
+      properties:
+        data:
+          type: array
+          description: An array of file objects
+          items:
+            $ref: '#/components/schemas/File'
+        paging:
+          $ref: '#/components/schemas/PagingNumeric'
   headers:
     X-RateLimit-Remaining:
       description: The number of remaining requests in the current period
@@ -302,16 +302,16 @@ components:
       schema:
         type: integer
       example: 90
-    Zamzar-Credits-Remaining:
-      description: The number of production credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 100
     X-RateLimit-Limit:
       description: The number of allowed requests in the current period
       schema:
         type: integer
       example: 600
+    Zamzar-Credits-Remaining:
+      description: The number of production credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 100
   securitySchemes:
     ApiKeyAuth:
       type: http

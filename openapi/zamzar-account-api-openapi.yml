@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Zamzar Account API
   description: Zamzar provides a simple API for fast, scalable, high-quality file conversion for 100s of formats.
@@ -46,15 +46,28 @@ paths:
           $ref: '#/components/responses/401'
       description: Retrieve your account and plan information, including the number of production and test credits remaining for the current billing period.
 components:
+  headers:
+    X-RateLimit-Remaining:
+      description: The number of remaining requests in the current period
+      schema:
+        type: integer
+      example: 597
+    Zamzar-Test-Credits-Remaining:
+      description: The number of test credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 90
+    X-RateLimit-Limit:
+      description: The number of allowed requests in the current period
+      schema:
+        type: integer
+      example: 600
+    Zamzar-Credits-Remaining:
+      description: The number of production credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 100
   schemas:
-    Errors:
-      type: object
-      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     Error:
       type: object
       description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
@@ -112,10 +125,11 @@ components:
               description: The number of conversion credits included in this plan per month
               format: int32
             maximum_file_size:
-              type: integer
+              type:
+              - integer
+              - 'null'
               description: The maximum size (in bytes) of files that can be uploaded with this plan; or `null` if this plan has no such cap.
               format: int64
-              nullable: true
       example:
         test_credits_remaining: 98
         credits_remaining: 97
@@ -124,27 +138,14 @@ components:
           price_per_month: 0
           conversions_per_month: 100
           maximum_file_size: 1024
-  headers:
-    X-RateLimit-Remaining:
-      description: The number of remaining requests in the current period
-      schema:
-        type: integer
-      example: 597
-    Zamzar-Test-Credits-Remaining:
-      description: The number of test credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 90
-    Zamzar-Credits-Remaining:
-      description: The number of production credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 100
-    X-RateLimit-Limit:
-      description: The number of allowed requests in the current period
-      schema:
-        type: integer
-      example: 600
+    Errors:
+      type: object
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
   responses:
     '401':
       description: Forbidden - the request is not using authentication. The response will include an array of `errors`.

@@ -1,12 +1,7 @@
 {
   "provider": "zamzar",
   "sources": [
-    "zamzar-account-api-openapi.yml",
-    "zamzar-files-api-openapi.yml",
-    "zamzar-formats-api-openapi.yml",
-    "zamzar-imports-api-openapi.yml",
-    "zamzar-jobs-api-openapi.yml",
-    "zamzar-welcome-api-openapi.yml"
+    "_original/zamzar-openapi.yaml"
   ],
   "outputs": [
     "zamzar-account-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "zamzar-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "zamzar-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zamzar-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zamzar-formats-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zamzar-imports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zamzar-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "zamzar-welcome-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
