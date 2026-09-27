@@ -105,17 +105,6 @@ paths:
       description: Retrieve a specific format and the cost of performing a conversion to one or more target formats.
 components:
   schemas:
-    Formats:
-      type: object
-      description: Contains a paged collection of formats listed in alphabetical order. The `targets` array represent the formats which the source format `name` can be converted to and the associated cost (in credits).
-      properties:
-        paging:
-          $ref: '#/components/schemas/PagingString'
-        data:
-          type: array
-          description: An array of source and target formats ordered alphabetically.
-          items:
-            $ref: '#/components/schemas/Format'
     PagingString:
       type: object
       properties:
@@ -139,6 +128,17 @@ components:
         last: pdf
         limit: 50
       description: When you request a list of of all resources of any type (files, formats, jobs), you will receive a paged collection as a response. A paged collection allows you to view a subset of the entire collection (limited to 50 elements) and makes it easy to implement pagination in your application. Use the `limit` parameter to limit the number of results and the `after` parameter to request the next page of results (based on the value of `last` within the paging object).
+    Formats:
+      type: object
+      description: Contains a paged collection of formats listed in alphabetical order. The `targets` array represent the formats which the source format `name` can be converted to and the associated cost (in credits).
+      properties:
+        paging:
+          $ref: '#/components/schemas/PagingString'
+        data:
+          type: array
+          description: An array of source and target formats ordered alphabetically.
+          items:
+            $ref: '#/components/schemas/Format'
     Format:
       type: object
       description: Represents the source format and an array of valid target formats.

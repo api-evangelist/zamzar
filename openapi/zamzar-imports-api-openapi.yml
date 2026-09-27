@@ -105,85 +105,6 @@ paths:
                 $ref: '#/components/schemas/Import'
 components:
   schemas:
-    File:
-      type: object
-      description: Represents a file which has been uploaded, imported or converted.
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: integer
-          description: The unique identifier assigned to the file
-          format: int32
-        key:
-          type: string
-          description: The API key which was used to create the file
-        name:
-          type: string
-          description: The name that was specified for the file (must not be more than 256 chars)
-        size:
-          type: integer
-          format: int64
-          description: The size of the file in bytes, derived from the content of the file
-        format:
-          type: string
-          description: The identifier of the format of the file
-        created_at:
-          type: string
-          description: The time at which the file was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
-          format: date-time
-      example:
-        id: 3
-        key: apikey
-        name: filename.jpg
-        size: 4096
-        format: jpg
-        created_at: '2022-01-01T14:15:22Z'
-    Imports:
-      type: object
-      description: Contains a paged collection of import objects. Newer imports appear before older imports.
-      properties:
-        paging:
-          $ref: '#/components/schemas/PagingNumeric'
-        data:
-          type: array
-          description: An array of import objects
-          items:
-            $ref: '#/components/schemas/Import'
-    Failure:
-      type: object
-      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
-      properties:
-        code:
-          type: integer
-          description: Can be used to determine what action to take
-          format: int32
-        message:
-          type: string
-          description: Provides an explanation of the failure (which could also be displayed to your users)
-      example:
-        code: 5
-        message: A file named portrait.png already exists
-    PagingNumeric:
-      type: object
-      properties:
-        total_count:
-          type: integer
-          description: The number of elements in the entire collection
-          format: int32
-        first:
-          type: integer
-          description: The identifier of the first element in this page of the collection
-          format: int32
-        last:
-          type: integer
-          description: The identifier of the last element in this page of the collection
-          format: int32
-        limit:
-          type: integer
-          description: The maximum number of elements this page could contain
-          format: int32
     Import:
       type: object
       description: Represents the process of copying a file from an external URL, (S)FTP server, or an Amazon S3 bucket.
@@ -236,6 +157,85 @@ components:
             reason: http URLs must not include a password (use https instead)
         created_at: '2022-01-01T14:15:22Z'
         finished_at: '2022-01-01T14:15:22Z'
+    Failure:
+      type: object
+      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
+      properties:
+        code:
+          type: integer
+          description: Can be used to determine what action to take
+          format: int32
+        message:
+          type: string
+          description: Provides an explanation of the failure (which could also be displayed to your users)
+      example:
+        code: 5
+        message: A file named portrait.png already exists
+    File:
+      type: object
+      description: Represents a file which has been uploaded, imported or converted.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: integer
+          description: The unique identifier assigned to the file
+          format: int32
+        key:
+          type: string
+          description: The API key which was used to create the file
+        name:
+          type: string
+          description: The name that was specified for the file (must not be more than 256 chars)
+        size:
+          type: integer
+          format: int64
+          description: The size of the file in bytes, derived from the content of the file
+        format:
+          type: string
+          description: The identifier of the format of the file
+        created_at:
+          type: string
+          description: The time at which the file was created on Zamzar servers ((UTC in [ISO_8601](https://en.wikipedia.org/wiki/ISO_8601)))
+          format: date-time
+      example:
+        id: 3
+        key: apikey
+        name: filename.jpg
+        size: 4096
+        format: jpg
+        created_at: '2022-01-01T14:15:22Z'
+    PagingNumeric:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: The number of elements in the entire collection
+          format: int32
+        first:
+          type: integer
+          description: The identifier of the first element in this page of the collection
+          format: int32
+        last:
+          type: integer
+          description: The identifier of the last element in this page of the collection
+          format: int32
+        limit:
+          type: integer
+          description: The maximum number of elements this page could contain
+          format: int32
+    Imports:
+      type: object
+      description: Contains a paged collection of import objects. Newer imports appear before older imports.
+      properties:
+        paging:
+          $ref: '#/components/schemas/PagingNumeric'
+        data:
+          type: array
+          description: An array of import objects
+          items:
+            $ref: '#/components/schemas/Import'
   securitySchemes:
     ApiKeyAuth:
       type: http

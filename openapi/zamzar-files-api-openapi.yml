@@ -187,7 +187,66 @@ paths:
       description: Retrieve the contents of a file which has been converted using the `/jobs` endpoint. The content of files which have been uploaded or converted can also be retrieved.
       x-is-file: true
 components:
+  headers:
+    Zamzar-Test-Credits-Remaining:
+      description: The number of test credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 90
+    X-RateLimit-Remaining:
+      description: The number of remaining requests in the current period
+      schema:
+        type: integer
+      example: 597
+    Zamzar-Credits-Remaining:
+      description: The number of production credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 100
+    X-RateLimit-Limit:
+      description: The number of allowed requests in the current period
+      schema:
+        type: integer
+      example: 600
   schemas:
+    Errors:
+      type: object
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
+      properties:
+        code:
+          type: integer
+          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
+          format: int32
+          example: 22
+        message:
+          type: string
+          description: The description of the error
+          example: unrecognised API version
+        context:
+          type: object
+          description: Further information about the cause of the error (only included for some error codes)
+          properties:
+            description:
+              type: string
+            value:
+              type: string
+          example:
+            requested_version: v42
+            supported_versions: v1
+      example:
+        message: an invalid value was specified for a parameter
+        code: 10
+        context:
+          parameter: target_format
+          reason: applescript is not a supported format
     File:
       type: object
       description: Represents a file which has been uploaded, imported or converted.
@@ -223,36 +282,6 @@ components:
         size: 4096
         format: jpg
         created_at: '2022-01-01T14:15:22Z'
-    Error:
-      type: object
-      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
-      properties:
-        code:
-          type: integer
-          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
-          format: int32
-          example: 22
-        message:
-          type: string
-          description: The description of the error
-          example: unrecognised API version
-        context:
-          type: object
-          description: Further information about the cause of the error (only included for some error codes)
-          properties:
-            description:
-              type: string
-            value:
-              type: string
-          example:
-            requested_version: v42
-            supported_versions: v1
-      example:
-        message: an invalid value was specified for a parameter
-        code: 10
-        context:
-          parameter: target_format
-          reason: applescript is not a supported format
     PagingNumeric:
       type: object
       properties:
@@ -272,14 +301,6 @@ components:
           type: integer
           description: The maximum number of elements this page could contain
           format: int32
-    Errors:
-      type: object
-      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     Files:
       type: object
       description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
@@ -291,27 +312,6 @@ components:
             $ref: '#/components/schemas/File'
         paging:
           $ref: '#/components/schemas/PagingNumeric'
-  headers:
-    X-RateLimit-Remaining:
-      description: The number of remaining requests in the current period
-      schema:
-        type: integer
-      example: 597
-    Zamzar-Test-Credits-Remaining:
-      description: The number of test credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 90
-    X-RateLimit-Limit:
-      description: The number of allowed requests in the current period
-      schema:
-        type: integer
-      example: 600
-    Zamzar-Credits-Remaining:
-      description: The number of production credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 100
   securitySchemes:
     ApiKeyAuth:
       type: http

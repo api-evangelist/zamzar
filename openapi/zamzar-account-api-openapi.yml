@@ -46,58 +46,7 @@ paths:
           $ref: '#/components/responses/401'
       description: Retrieve your account and plan information, including the number of production and test credits remaining for the current billing period.
 components:
-  headers:
-    X-RateLimit-Remaining:
-      description: The number of remaining requests in the current period
-      schema:
-        type: integer
-      example: 597
-    Zamzar-Test-Credits-Remaining:
-      description: The number of test credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 90
-    X-RateLimit-Limit:
-      description: The number of allowed requests in the current period
-      schema:
-        type: integer
-      example: 600
-    Zamzar-Credits-Remaining:
-      description: The number of production credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 100
   schemas:
-    Error:
-      type: object
-      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
-      properties:
-        code:
-          type: integer
-          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
-          format: int32
-          example: 22
-        message:
-          type: string
-          description: The description of the error
-          example: unrecognised API version
-        context:
-          type: object
-          description: Further information about the cause of the error (only included for some error codes)
-          properties:
-            description:
-              type: string
-            value:
-              type: string
-          example:
-            requested_version: v42
-            supported_versions: v1
-      example:
-        message: an invalid value was specified for a parameter
-        code: 10
-        context:
-          parameter: target_format
-          reason: applescript is not a supported format
     Account:
       type: object
       description: Your current subscription plan and the number of conversions that you have remaining in this billing period.
@@ -146,6 +95,57 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
+      properties:
+        code:
+          type: integer
+          description: The unique identifier for the type of error. `1x` relates to problems with the content of the request. `2x` relates to the nature of the request. `3x` relates to problems with the service.
+          format: int32
+          example: 22
+        message:
+          type: string
+          description: The description of the error
+          example: unrecognised API version
+        context:
+          type: object
+          description: Further information about the cause of the error (only included for some error codes)
+          properties:
+            description:
+              type: string
+            value:
+              type: string
+          example:
+            requested_version: v42
+            supported_versions: v1
+      example:
+        message: an invalid value was specified for a parameter
+        code: 10
+        context:
+          parameter: target_format
+          reason: applescript is not a supported format
+  headers:
+    Zamzar-Test-Credits-Remaining:
+      description: The number of test credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 90
+    X-RateLimit-Remaining:
+      description: The number of remaining requests in the current period
+      schema:
+        type: integer
+      example: 597
+    Zamzar-Credits-Remaining:
+      description: The number of production credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 100
+    X-RateLimit-Limit:
+      description: The number of allowed requests in the current period
+      schema:
+        type: integer
+      example: 600
   responses:
     '401':
       description: Forbidden - the request is not using authentication. The response will include an array of `errors`.
