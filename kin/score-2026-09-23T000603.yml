@@ -1,29 +1,27 @@
-# Kin Score artifact — zamzar — 2026-08-31T223420
+# Kin Score artifact — zamzar — 2026-09-23T000603
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: zamzar
-  schema_version: 0.17.2
-  scored_at: '2026-08-31'
-  run_ts: 2026-08-31T223420
-  composite: 41.1
+  schema_version: 0.22.0
+  scored_at: '2026-09-23'
+  run_ts: 2026-09-23T000603
+  composite: 40.1
   band: developing
   facets:
     discoverability: 68.5
-    contract_quality: 62.3
-    governance: 9.8
+    contract_quality: 61.0
+    contract_governance: 9.8
     operational_transparency: 21.1
     developer_ergonomics: 23.8
-    commercial_clarity: 50.0
-    contract_governance: 9.8
     access_clarity: 50.0
   agent_readiness:
-    score: 33.1
+    score: 34.8
     band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
-      reversibility_documented: false
+      reversibility_documented: documented
       mcp_server: false
       auth_clarity: bearer
       idempotency: false
