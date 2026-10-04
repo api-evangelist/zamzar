@@ -253,17 +253,14 @@ components:
         context:
           parameter: target_format
           reason: applescript is not a supported format
-    Files:
+    Errors:
       type: object
-      description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
       properties:
-        data:
+        errors:
           type: array
-          description: An array of file objects
           items:
-            $ref: '#/components/schemas/File'
-        paging:
-          $ref: '#/components/schemas/PagingNumeric'
+            $ref: '#/components/schemas/Error'
     PagingNumeric:
       type: object
       properties:
@@ -283,15 +280,28 @@ components:
           type: integer
           description: The maximum number of elements this page could contain
           format: int32
-    Errors:
+    Files:
       type: object
-      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
       properties:
-        errors:
+        data:
           type: array
+          description: An array of file objects
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/File'
+        paging:
+          $ref: '#/components/schemas/PagingNumeric'
   headers:
+    Zamzar-Credits-Remaining:
+      description: The number of production credits remaining in the current billing period
+      schema:
+        type: integer
+      example: 100
+    X-RateLimit-Limit:
+      description: The number of allowed requests in the current period
+      schema:
+        type: integer
+      example: 600
     Zamzar-Test-Credits-Remaining:
       description: The number of test credits remaining in the current billing period
       schema:
@@ -302,16 +312,6 @@ components:
       schema:
         type: integer
       example: 597
-    X-RateLimit-Limit:
-      description: The number of allowed requests in the current period
-      schema:
-        type: integer
-      example: 600
-    Zamzar-Credits-Remaining:
-      description: The number of production credits remaining in the current billing period
-      schema:
-        type: integer
-      example: 100
   securitySchemes:
     ApiKeyAuth:
       type: http

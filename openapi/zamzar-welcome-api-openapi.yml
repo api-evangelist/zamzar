@@ -42,6 +42,17 @@ paths:
       tags:
       - Welcome
 components:
+  responses:
+    '401':
+      description: Forbidden - the request is not using authentication. The response will include an array of `errors`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+          example:
+            errors:
+            - code: 21
+              message: resource does not exist
   schemas:
     Errors:
       type: object
@@ -81,17 +92,6 @@ components:
         context:
           parameter: target_format
           reason: applescript is not a supported format
-  responses:
-    '401':
-      description: Forbidden - the request is not using authentication. The response will include an array of `errors`.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Errors'
-          example:
-            errors:
-            - code: 21
-              message: resource does not exist
   securitySchemes:
     ApiKeyAuth:
       type: http
