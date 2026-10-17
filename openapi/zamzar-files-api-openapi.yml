@@ -188,6 +188,25 @@ paths:
       x-is-file: true
 components:
   schemas:
+    Files:
+      type: object
+      description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
+      properties:
+        data:
+          type: array
+          description: An array of file objects
+          items:
+            $ref: '#/components/schemas/File'
+        paging:
+          $ref: '#/components/schemas/PagingNumeric'
+    Errors:
+      type: object
+      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     File:
       type: object
       description: Represents a file which has been uploaded, imported or converted.
@@ -223,6 +242,25 @@ components:
         size: 4096
         format: jpg
         created_at: '2022-01-01T14:15:22Z'
+    PagingNumeric:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: The number of elements in the entire collection
+          format: int32
+        first:
+          type: integer
+          description: The identifier of the first element in this page of the collection
+          format: int32
+        last:
+          type: integer
+          description: The identifier of the last element in this page of the collection
+          format: int32
+        limit:
+          type: integer
+          description: The maximum number of elements this page could contain
+          format: int32
     Error:
       type: object
       description: An error object containing a message, code and context. Returned within an array of `errors` when a response contains a `4xx` or `5xx` code.
@@ -253,50 +291,17 @@ components:
         context:
           parameter: target_format
           reason: applescript is not a supported format
-    Errors:
-      type: object
-      description: When a response contains a `4xx` or `5xx` response code, the body of the request will contain one or more error objects. Problems
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    PagingNumeric:
-      type: object
-      properties:
-        total_count:
-          type: integer
-          description: The number of elements in the entire collection
-          format: int32
-        first:
-          type: integer
-          description: The identifier of the first element in this page of the collection
-          format: int32
-        last:
-          type: integer
-          description: The identifier of the last element in this page of the collection
-          format: int32
-        limit:
-          type: integer
-          description: The maximum number of elements this page could contain
-          format: int32
-    Files:
-      type: object
-      description: Contains a paged collection of files. Newer files appear before older files. Expired files are not included.
-      properties:
-        data:
-          type: array
-          description: An array of file objects
-          items:
-            $ref: '#/components/schemas/File'
-        paging:
-          $ref: '#/components/schemas/PagingNumeric'
   headers:
     Zamzar-Credits-Remaining:
       description: The number of production credits remaining in the current billing period
       schema:
         type: integer
       example: 100
+    X-RateLimit-Remaining:
+      description: The number of remaining requests in the current period
+      schema:
+        type: integer
+      example: 597
     X-RateLimit-Limit:
       description: The number of allowed requests in the current period
       schema:
@@ -307,11 +312,6 @@ components:
       schema:
         type: integer
       example: 90
-    X-RateLimit-Remaining:
-      description: The number of remaining requests in the current period
-      schema:
-        type: integer
-      example: 597
   securitySchemes:
     ApiKeyAuth:
       type: http

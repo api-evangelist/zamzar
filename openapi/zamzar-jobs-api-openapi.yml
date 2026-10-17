@@ -296,16 +296,6 @@ paths:
                 $ref: '#/components/schemas/Job'
 components:
   schemas:
-    Jobs:
-      type: object
-      description: Contains a paged collection of job objects. Newer jobs appear before older jobs.
-      properties:
-        paging:
-          $ref: '#/components/schemas/PagingNumeric'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
     Exports:
       type: array
       description: An array of objects representing the process of copying converted files to the location specified in the export_url (when submitting a job via the `/jobs` endpoint)
@@ -346,6 +336,39 @@ components:
         size: 4096
         format: jpg
         created_at: '2022-01-01T14:15:22Z'
+    PagingNumeric:
+      type: object
+      properties:
+        total_count:
+          type: integer
+          description: The number of elements in the entire collection
+          format: int32
+        first:
+          type: integer
+          description: The identifier of the first element in this page of the collection
+          format: int32
+        last:
+          type: integer
+          description: The identifier of the last element in this page of the collection
+          format: int32
+        limit:
+          type: integer
+          description: The maximum number of elements this page could contain
+          format: int32
+    Failure:
+      type: object
+      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
+      properties:
+        code:
+          type: integer
+          description: Can be used to determine what action to take
+          format: int32
+        message:
+          type: string
+          description: Provides an explanation of the failure (which could also be displayed to your users)
+      example:
+        code: 5
+        message: A file named portrait.png already exists
     Import:
       type: object
       description: Represents the process of copying a file from an external URL, (S)FTP server, or an Amazon S3 bucket.
@@ -469,6 +492,16 @@ components:
           description: Additional options for the conversion
           additionalProperties: true
       description: Represents the process of converting a file to another format.
+    Jobs:
+      type: object
+      description: Contains a paged collection of job objects. Newer jobs appear before older jobs.
+      properties:
+        paging:
+          $ref: '#/components/schemas/PagingNumeric'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
     Export:
       type: object
       description: An object representing the process of copying converted files to the location specified in the `export_url` (when submitting a job via the `/jobs` endpoint). The `status` will be set to `initialising` or `successful`.
@@ -497,39 +530,6 @@ components:
         id: 1
         url: s3://CREDENTIAL_NAME@my-bucket-name/logo.jpg
         status: successful
-    Failure:
-      type: object
-      description: If a process fails, the response will include a failure object to describe the error. If a process is either incomplete or successful, the failure object will not be present.
-      properties:
-        code:
-          type: integer
-          description: Can be used to determine what action to take
-          format: int32
-        message:
-          type: string
-          description: Provides an explanation of the failure (which could also be displayed to your users)
-      example:
-        code: 5
-        message: A file named portrait.png already exists
-    PagingNumeric:
-      type: object
-      properties:
-        total_count:
-          type: integer
-          description: The number of elements in the entire collection
-          format: int32
-        first:
-          type: integer
-          description: The identifier of the first element in this page of the collection
-          format: int32
-        last:
-          type: integer
-          description: The identifier of the last element in this page of the collection
-          format: int32
-        limit:
-          type: integer
-          description: The maximum number of elements this page could contain
-          format: int32
   securitySchemes:
     ApiKeyAuth:
       type: http
