@@ -64,45 +64,161 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Zamzar is an online file conversion platform with a REST API for converting files between 100+ formats including documents, videos, audio, images, and CAD files. The API supports over 1,100 distinct format conversions processed asynchronously using a credit-based billing model.
+Zamzar is an online file conversion platform with a REST API for converting files between 100+ formats including documents, videos, audio, images, and CAD files. The API supports over 1,100 distinct format conversions processed asynchronously using a credit-based billing model. File sources include direct upload, HTTP/FTP/SFTP URLs, and Amazon S3. Both a production environment and a sandbox environment are provided for development.
 
-## Developer Resources
+**Areas:** File Conversion · Documents · Video · Audio · Image · CAD · REST API
 
-- **Developer Portal:** https://developers.zamzar.com/
-- **API Documentation:** https://developers.zamzar.com/docs
-- **OpenAPI Specification:** https://github.com/zamzar/zamzar-spec
-- **GitHub Organization:** https://github.com/zamzar
-- **Pricing:** https://developers.zamzar.com/pricing
-- **Status Page:** https://www.zamzarstatus.com/
-- **Blog:** https://blog.zamzar.com/
+## Zamzar on APIs.io
 
-## API Overview
+Everything profiled for Zamzar is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/zamzar/](https://apis.io/providers/zamzar/)** — or go straight to one of the APIs or properties below.
 
-The Zamzar API is a REST API using HTTP Basic Auth (API key as username). It provides two environments:
+### APIs (6)
 
-- **Production:** `https://api.zamzar.com/v1/`
-- **Sandbox:** `https://sandbox.zamzar.com/v1/`
+- [Zamzar Account API](https://apis.io/apis/zamzar/zamzar-account-api/) — View account and plan information
+- [Zamzar Files API](https://apis.io/apis/zamzar/zamzar-files-api/) — Create, retrieve or delete files
+- [Zamzar Formats API](https://apis.io/apis/zamzar/zamzar-formats-api/) — List supported source and target formats
+- [Zamzar Imports API](https://apis.io/apis/zamzar/zamzar-imports-api/) — Import files from an external URL, (S)FTP server or Amazon S3 bucket
+- [Zamzar Jobs API](https://apis.io/apis/zamzar/zamzar-jobs-api/) — Start a new conversion job plus related operations
+- [Zamzar Welcome API](https://apis.io/apis/zamzar/zamzar-welcome-api/) — Get started with the Zamzar API
 
-### Key Endpoints
+### Published properties
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/formats/` | GET | List all supported formats |
-| `/formats/{format}` | GET | Get details for a specific format |
-| `/jobs` | POST | Create a conversion job |
-| `/jobs/{id}` | GET | Check conversion job status |
-| `/files/{id}/content` | GET | Download converted file |
-| `/files/{id}` | DELETE | Delete a file from Zamzar servers |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### SDKs
+#### Agentic access (1)
 
-- **Python:** https://github.com/zamzar/zamzar-python
-- **PHP:** https://github.com/zamzar/zamzar-php
-- **Java:** https://github.com/zamzar/zamzar-java
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Catalog Files
+- [Zamzar Agentic Access](https://apis.io/agentic-access/zamzar/zamzar-agentic-access/)
 
-- [`apis.yml`](apis.yml) — APIs.json 0.19 provider profile
-- [`plans/zamzar-plans-pricing.yml`](plans/zamzar-plans-pricing.yml) — Pricing plans and tiers
-- [`rate-limits/zamzar-rate-limits.yml`](rate-limits/zamzar-rate-limits.yml) — API rate limits
-- [`finops/zamzar-finops.yml`](finops/zamzar-finops.yml) — Financial operations guidance
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [Account](https://apis.io/schemas/zamzar/account/)
+- [Failure](https://apis.io/schemas/zamzar/failure/)
+- [File](https://apis.io/schemas/zamzar/file/)
+- [Format](https://apis.io/schemas/zamzar/format/)
+- [Import](https://apis.io/schemas/zamzar/import/)
+- [Job](https://apis.io/schemas/zamzar/job/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Zamzar Context](https://apis.io/jsonld/zamzar/zamzar-context/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Get Account](https://apis.io/examples/zamzar/get-account/)
+- [List Formats](https://apis.io/examples/zamzar/list-formats/)
+- [Start Import](https://apis.io/examples/zamzar/start-import/)
+- [Submit Job](https://apis.io/examples/zamzar/submit-job/)
+- [Upload File](https://apis.io/examples/zamzar/upload-file/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Zamzar Account API](https://apis.io/collections/zamzar/open-zamzar-account-api/)
+- [Zamzar Account Files API](https://apis.io/collections/zamzar/open-zamzar-files-api/)
+- [Zamzar Account Formats API](https://apis.io/collections/zamzar/open-zamzar-formats-api/)
+- [Zamzar Account Imports API](https://apis.io/collections/zamzar/open-zamzar-imports-api/)
+- [Zamzar Account Jobs API](https://apis.io/collections/zamzar/open-zamzar-jobs-api/)
+- [Zamzar Account Welcome API](https://apis.io/collections/zamzar/open-zamzar-welcome-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Zamzar — jsonschema rules](https://apis.io/rules/zamzar/zamzar-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Zamzar Authentication](https://apis.io/security/zamzar/zamzar-authentication/)
+- [Zamzar Domain Security](https://apis.io/security/zamzar/zamzar-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Zamzar Plans Pricing](https://apis.io/plans/zamzar/zamzar-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Zamzar Rate Limits](https://apis.io/rate-limits/zamzar/zamzar-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Zamzar Finops](https://apis.io/finops/zamzar/zamzar-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.zamzar.com/)
+- [Documentation](https://developers.zamzar.com/docs)
+- [Pricing](https://developers.zamzar.com/pricing)
+- [Blog](https://blog.zamzar.com/)
+- [Status](https://www.zamzarstatus.com/)
+
+## API Evangelist rating
+
+**Kin Score 32.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.4 |
+| Contract governance | 9.8 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 18.4 |
+
+**Agent readiness 34.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | verified |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/zamzar/](https://apis.io/providers/zamzar/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Zamzar: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/zamzar/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
